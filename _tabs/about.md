@@ -20,7 +20,7 @@ Consequently, he opted to enroll in Computer Science at the University of Girona
 
 Throughout his degree program,
 he developed a strong passion for software automation,
-artificial intelligence, functional programming,
+artificial intelligence, functional programming
 and the intricacies of working within Linux environments.
 Simultaneously,
 he gained valuable hands-on experience by collaborating with local companies in Girona.
@@ -29,8 +29,8 @@ Following this, he embarked on a journey to attain a master's degree in Data Sci
 This decision was underscored by his firm belief in the transformative potential of data-driven solutions,
 which he views as the bedrock of the future.
 
-Wil have thought functional and logical programming,
-in University of Girona.
-He also has been working as a Computer Scientist in the private sector focussing on analyzing data,
-hecreate AI solution as well as automating infrastructure tasks.
-He enjoy coming up with smart solutions for tough challenges.
+Will has worked as an associate professor in the Computer Science program at the University of Girona.
+He taught subjects related to functional and logical programming. Outside of teaching,
+he also worked as a Computer Scientist in the private sector. There,
+he concentrated on studying data,
+creating AI solutions, and automating tasks related to computer systems.
