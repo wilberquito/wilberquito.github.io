@@ -7,9 +7,8 @@
   icon: 'fab fa-linkedin'   # icons powered by <https://fontawesome.com/>
   url:  'https://www.linkedin.com/in/wilberquito/'                  # Fill with your Linkedin homepage
 
-- type: ytmusic
-  icon: 'fab fa-instagram'
-  url: 'https://www.instagram.com/wilberquito/'
+- type: twitter
+  icon: "fab fa-twitter"
 
 - type: email
   icon: "fas fa-envelope"
