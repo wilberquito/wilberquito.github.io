@@ -114,12 +114,10 @@ command:
 $ ./symlink
 ```
 
-> The `symlink` program operates interactively. Upon encountering an existing
-configuration file or folder, it engages in a dialogue, offering you options to
-either create a backup, remove the existing item, or skip the creation of the
-symbolic link altogether. This interactive approach ensures that you have
-control over how the symbolic links are established, preventing accidental
-overwrites or disruptions to your existing configurations.
+> The `symlink` program operates interactively. This interactive approach
+> ensures that you have
+> control over how the symbolic links are established, preventing accidental
+> overwrites or disruptions to your existing configurations.
 {: .prompt-info }
 
 
