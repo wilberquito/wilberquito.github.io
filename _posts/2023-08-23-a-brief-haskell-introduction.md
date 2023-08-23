@@ -1,3 +1,14 @@
+---
+title: A Brief Haskell Introduction
+author: wilberquito
+date: 2023-08-23 11:33:00 +0800
+categories: [Teach, Haskell]
+tags: [programming, fp, haskell, math]
+pin: true
+math: true
+mermaid: true
+---
+
 *"Can programming be liberated from the von Neumann style?"*
 
 Von Neumann programming languages, aka "imperative programming languages" use
