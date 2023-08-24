@@ -1,8 +1,8 @@
 ---
-title: A Brief Haskell Introduction
+title: Brief Haskell Introduction
 author: wilberquito
 date: 2023-08-23 11:33:00 +0800
-categories: [Teach, Haskell]
+categories: [Programming, Haskell]
 tags: [programming, fp, haskell, math]
 pin: true
 math: true
@@ -133,10 +133,10 @@ ghci> a - f a b * c
 ### Purity
 
 Mathematical functions are pure, where its return value depends solely on its
-input parameters, and they do not produce side effect as no mutation is allowed.
-
-In Haskell as in math, if we define a function $$f$$ that takes as an argument $$x$$,
-every evaluation of the application $$f(x)$$ return the same $$y$$.
+input parameters, and they do not produce side effect as no mutation is
+allowed. In Haskell as in math, if we define a function $$f$$ that takes as an
+argument $$x$$, every evaluation of the application $$f(x)$$ return the same
+$$y$$.
 
 ```haskell
 ghci> double x = x * 2
@@ -195,34 +195,110 @@ ghci> square (add1 2)
 ghci> "9"
 ```
 
-We are interested on how the expression `square (add1 2)` is reduced to `9`. If Haskell would
-reduce expressions in an applicative way, the reduction order would proceed by
-evaluating the sub-expressions and then applying the function, e.g.:
+We are interested on how the expression `square (add1 2)` is reduced to `9`.
+If Haskell would use **applicative reduction** (innermost redex), the order would proceed by
+evaluating the sub-expressions and then applying the function, i.e.
 
 $$
 \begin{eqnarray}
-S \ (A \ 2) \\
-\implies \lambda x. x^2 \ ((\lambda x. x + 1) \ 2) \\
-\implies \lambda x. x^2 \ (\lambda x. (x + 1) \ 2) \\
-
+& S \ (A \ 2) \\
+& \lambda x. x^2 \left( \underline{ (\lambda x. x + 1) \ 2} \right) \\
+by \ add1 \ definition \implies & \lambda x. x^2 \left( 2 + 1 \right) \\
+by \ (+) \ operator \implies & \underline{ \lambda x. x^2 \ 3 }\\
+by \ square \ definition \implies & 3^2 \\
+by \ (\wedge) \ operator \implies & 9 \\
 \end{eqnarray}
 $$
 
+Yet Haskell uses **normal order reduction** (outermost redex) which proceeds by
+applying the function first and then evaluating the sub-expression, i.e.
+
+$$
+\begin{eqnarray}
+& S \ (A \ 2) \\
+& \underline{ \lambda x. x^2 \left( (\lambda x. x + 1) \ 2 \right) } \\
+by \ square \ definition \implies & \left( \underline{ (\lambda x. x + 1) \ 2 } \right)^2  \\
+by \ add1 \ definition \implies & \ (2 + 1)^2  \\
+by \ (+) \ operator \implies & 3^2 \\
+by \ (\wedge) \ operator \implies & 9 \\
+\end{eqnarray}
+$$
+
+Normal order reduction comes with various advantages (although it is not
+without its drawbacks, such as increased memory usage). Among its significant
+benefits is that it ensures reaching a normal form if one exists in the
+expression being reduced, as guaranteed by the Standardization Theorem. For
+instance, consider the functions `inf` and `zero`. The former function
+aligns with this principle as it generates the infinity number through
+recursive processes. On the contrary, the latter function consistently
+evaluates to zero, irrespective of its input value.
+
+```haskell
+ghci> inf       = 1 + inf
+ghci> zero x    = 0
+ghci> zero inf
+ghci> "0"
+```
+
+If Haskell were to perform reduction in applicative order on the expression
+`zero inf`, it would result in a hang. The reason for this is as previously
+explained: applicative reduction order evaluates the arguments before the
+functions. In this specific scenario, the evaluation of the argument leads to a
+hang, i.e.
+
+$$
+\begin{eqnarray}
+& zero \ inf \\
+by \ inf \ definition \implies & zero \ (1 + inf)  \\
+by \ inf \ definition \implies & zero \ (1 + (1 + inf))  \\
+by \ inf \ definition \implies & zero \ (1 + (1 + (1 + inf)))  \\
+& \cdot \ \cdot \ \cdot
+\end{eqnarray}
+$$
+
+In normal order reduction this is trivial, i.e.
+
+$$
+\begin{eqnarray}
+& zero \ inf \\
+by \ zero \ definition \implies & 0  \\
+\end{eqnarray}
+$$
+
+Another big benefits is that as argument expressions are passed without
+evaluating them (pass by name), **any time a name is evaluated it gets
+shared**. Every occurrence of the name points at the same potentially
+unevaluated expression. To show how the sharing work, lets define a function
+`square` that has one argument called `x`, we can also say that the function
+`square` has bind the name `x`. Notice that `x` is used twice in the function
+definition.
+
+```haskell
+ghci> square x = x * x
+```
+
+You may imagine that the evaluation of the expression `square (2 + 2)` is the following;
 
 
-Applicative order proceeds by evaluating the sub-expressions and then applying
-the function
+$$
+\begin{eqnarray}
+& square \ (2 + 2) \\
+by \ square \ definition \implies & (2 + 2) * (2 + 2) \\
+operator \ (*) \ forces \ left \ argument \implies & 4 * (2 + 2) \\
+operator \ (*) \ forces \ right \ argument \implies & 4 * 4 \\
+by \ (*) \ operator \implies & 16 \\
+\end{eqnarray}
+$$
 
+However, what really happens is that the expression $$ 2 + 2 $$ referenced by
+the name `x` is only computed once. The result of the evaluation is then shared
+between all occurrences, i.e.
 
-
-, normal order evaluation proceeds by applying the function first
-and then evaluating the sub-expressions.
-
-
-
-$$\lambda x. x$$
-
-$$\begin{eqnarray}
-y &=& 1+1   \\
-&=& 2
-\end{eqnarray}$$
+$$
+\begin{eqnarray}
+& square \ (2 + 2) \\
+by \ square \ definition \implies & (2 + 2) * (2 + 2) \\
+operator \ (*) \ forces \ left \ argument \implies & 4 * 4 \\
+by \ (*) \ operator \implies & 16 \\
+\end{eqnarray}
+$$
