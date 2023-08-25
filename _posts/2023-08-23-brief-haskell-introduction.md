@@ -32,7 +32,7 @@ _Greek alphabet, lowercase lambda_
 Haskell is a pure **functional programming** language known for **its
 strong type system** and emphasis on **purity** and **immutability**. It's designed
 to be **elegant**, **concise**, and **mathematically based**. Haskell key features
-include **lazy evaluation**, **pattern matching**, and **type inference**, which
+include **lazy evaluation**, **type inference** and much more, which
 promote safer and expressive code.
 
 ## What you need to program in Haskell?
@@ -70,7 +70,7 @@ You can use `ghci` as a calculator,
 
 ```haskell
 ghci> 2 + 5
-"7"
+7
 ```
 
 but you take advantages from Haskell power when you write the logic on scripts.
@@ -119,12 +119,12 @@ In mathematics, the application of functions is denoted by parenthesis.
 
 $$ a - f(a, b) * c $$
 
-In Haskell function application is denoted by space, for instance;
+In Haskell function application is denoted by space, i.e.
 
 ```haskell
 ghci> a = 1 ; b = 2 ; c = 3 ; f = (+)
 ghci> a - f a b * c
-"-8"
+-8
 ```
 
 > Function application denoted by space has maximum priority.
@@ -142,7 +142,7 @@ $$y$$.
 ghci> double x = x * 2
 ghci> f        = double
 ghci> f 2
-ghci> "4"
+ghci> 4
 ```
 
 ### Higher Order
@@ -154,7 +154,7 @@ be passed as arguments
 ghci> double x      = x * 2
 ghci> computeBy f a = f a
 ghci> computeBy double 3
-ghci> "6"
+ghci> 6
 ```
 
 , or being returned as values.
@@ -163,7 +163,7 @@ ghci> "6"
 ghci> double x  = x * 2
 ghci> double'   = double
 ghci> double' 2
-ghci> "4"
+ghci> 4
 ```
 
 ### Order Reduction
@@ -178,11 +178,11 @@ ghci> add1    = x + 1
 ghci> square  = x^2
 ```
 
-We can express the `add1` function using Lambda Calculus as follow;
+We can express the `add1` function using Lambda Calculus as follow.
 
 $$ A = (\lambda x. x + 1) $$
 
-, and the `square` function as follow;
+, and the `square` function as follow.
 
 $$ S = (\lambda x. x^2) $$
 
@@ -192,7 +192,7 @@ expression. In Haskell this expression could be written as;
 
 ```haskell
 ghci> square (add1 2)
-ghci> "9"
+ghci> 9
 ```
 
 We are interested on how the expression `square (add1 2)` is reduced to `9`.
@@ -237,7 +237,7 @@ evaluates to zero, irrespective of its input value.
 ghci> inf       = 1 + inf
 ghci> zero x    = 0
 ghci> zero inf
-ghci> "0"
+0
 ```
 
 If Haskell were to perform reduction in applicative order on the expression
@@ -270,8 +270,7 @@ evaluating them (pass by name), **any time a name is evaluated it gets
 shared**. Every occurrence of the name points at the same potentially
 unevaluated expression. To show how the sharing work, lets define a function
 `square` that has one argument called `x`, we can also say that the function
-`square` has bind the name `x`. Notice that `x` is used twice in the function
-definition.
+`square` has bounded the name `x`.
 
 ```haskell
 ghci> square x = x * x
@@ -279,13 +278,12 @@ ghci> square x = x * x
 
 You may imagine that the evaluation of the expression `square (2 + 2)` is the following;
 
-
 $$
 \begin{eqnarray}
 & square \ (2 + 2) \\
 by \ square \ definition \implies & (2 + 2) * (2 + 2) \\
-operator \ (*) \ forces \ left \ argument \implies & 4 * (2 + 2) \\
-operator \ (*) \ forces \ right \ argument \implies & 4 * 4 \\
+operator \ (*) \ forces \ left \ expression \implies & 4 * (2 + 2) \\
+operator \ (*) \ forces \ right \ expression \implies & 4 * 4 \\
 by \ (*) \ operator \implies & 16 \\
 \end{eqnarray}
 $$
@@ -298,7 +296,164 @@ $$
 \begin{eqnarray}
 & square \ (2 + 2) \\
 by \ square \ definition \implies & (2 + 2) * (2 + 2) \\
-operator \ (*) \ forces \ left \ argument \implies & 4 * 4 \\
+operator \ (*) \ forces \ left \ expression \implies & 4 * 4 \\
 by \ (*) \ operator \implies & 16 \\
 \end{eqnarray}
 $$
+
+## Lazy Evaluation
+
+In Haskell, expression are only evaluated when they are really needed. When we
+say a expression is needed, we refer to the fact that a expression need to be
+computed to produce value.
+
+Consider the lambda abstraction $$F$$, which is defined to take two arguments
+and return the first one:
+
+$$
+F = \lambda x, y. \ x
+$$
+
+In order to fully evaluate the abstraction $$F$$, it must be applied with two
+arguments. However, it's important to note that the definition of $$F$$ only
+employs the first argument while ignoring the second argument. The lambda
+abstraction's structure includes both $$x$$ and $$y$$ as parameters, but when the
+function is applied, it only utilizes $$x$$ in its definition.
+
+Consider now the definition of the data structure list, a list that can be defined
+recursively, i.e.
+
+$$
+List = Empty \ | \ L : List
+$$
+
+As you can imagine, by this definition we can create an infinite list, i.e.
+
+$$
+L : (L : (L : ( L : ( \cdot \ \cdot \ \cdot ))))
+$$
+
+Certainly, here's a rephrased version of your explanation:
+
+Moreover, the process of evaluating an infinite list inevitably demands an
+infinite duration. In the Haskell, generating an infinite
+list of numbers is remarkably simple:
+
+```haskell
+ghci> numbers = [1..]
+```
+
+In this scenario, the generation of this infinite list functions as an
+expression. Since no immediate evaluation of this expression is required, the
+interpreter remains unaffected and doesn't stall. However, **when we request the
+presentation of the list, we effectively compel the evaluation of the
+expression**. Consequently, as anticipated, the process comes to a halt:
+
+```haskell
+ghci> numbers
+[1, 2, 3, 4, 5, 6, ...]
+```
+
+The same principle applies to the lambda abstraction $$F$$, where the second
+argument remains unused and thus not computed. Bellow we exemplify this
+phenomenon in a Haskell context.
+
+
+In this instance, when the infinite list of numbers is employed as the second
+argument of function `f`, the interpreter proceeds without any issue:
+
+```haskell
+ghci> numbers = [1..]
+ghci> f a b = a
+ghci> f (2 + 2) numbers
+4
+```
+
+However, it's important to note that when the roles are reversed and the
+infinite list is passed as the first argument to function `f`, the
+interpreter will halt. This is a consequence of the
+evaluation mechanism for infinite lists.
+
+```haskell
+ghci> numbers = [1..]
+ghci> f a b = a
+ghci> f numbers (2 + 2)
+[1, 2, 3, 4, 5, 6, ...]
+```
+
+## Variables
+
+In Haskell, what are referred to  "variables" defy the conventional
+understanding of variables in imperative programming. Abiding by the principle
+of transformation over mutability, Haskell employs immutable variables. A
+better way to refer to variables in Haskell is "values" or "names".
+
+Hence, attempting to modify any value's state as demonstrated in the following
+script module will lead to an error involving multiple bindings.
+
+```haskell
+main = do
+  let x = 1
+      x = 2
+  return ()
+```
+{: file="~/Downloads/DummyError.hs" }
+
+```haskell
+ghci> :l DummyError.hs
+"[1 of 1] Compiling Main             ( DummyError.hs, interpreted )
+
+DummyError.hs:2:7: error:
+    Conflicting definitions for ‘x’
+    Bound at: DummyError.hs:2:7
+              DummyError.hs:3:7
+  |
+2 |   let x = 1
+  |       ^^^^^."
+```
+
+## Types
+
+Haskell compiler ensures that every expression in the program has a
+well-defined type, and **type's expressions are checked at compile-time**.
+Inconsistent use of types leads to type errors.
+
+What are types by the way?, intuitively, we can think of **types as sets of
+values and a set of allowed operations on those values**.
+
+Here you have some of the built-in types in Haskell:
+
+
+|       Type        |          Literals          |                                  Use                                   |                  Operations                   |
+| :---------------: | :------------------------: | :--------------------------------------------------------------------: | :-------------------------------------------: |
+|        Int        |          1, 2, -3          |                      Number type (signed, 64bit)                       |       +, -, \*, div, mod, fromIntegral        |
+|      Integer      | 1, -2, 900000000000000000  |                         Unbounded number type                          | +, -, \*, div, mod, fromInteger, fromIntegral |
+|       Float       |         0.1, 1.2e5         |                         Floating point numbers                         |               +, -, \*, /, sqrt               |
+|      Double       |         0.1, 1.2e5         | Floating point numbers. Aproximations are more precise than Float type |               +, -, \*, /, sqrt               |
+|       Bool        |        True, False         |                              Truth values                              |           &&, \|\|, not, otherwise            |
+|       Char        | 'a', 'Z', '\n', '\t', '\\' |  Represents a character (a letter, a digit, a punctuation mark, etc)   | ord, chr, isAlpha, isDigit, isUpper, isLower  |
+| String aka [Char] |         "abcd", ""         |                         Strings of characters                          |                  reverse, ++                  |
+
+
+As every expression in Haskell has its own type, the compiler can reason quite a lot about
+our programs before run them unlike other programming languages.
+One of the most powerful features of Haskell is that it **supports type inference**.
+
+Most of the times, Haskell by its own can infer the type of expressions, so we
+do not need to explicitly write out the types of our functions and expressions
+to get things done, e.g.
+
+```haskell
+GHCi> :t 'a'
+'a' :: Char
+GHCi> :t True
+True :: Bool
+GHCi> :t "HELLO!"
+"HELLO!" :: [Char]
+GHCi> :t (True, 'a')
+(True, 'a') :: (Bool, Char)
+GHCi> :t 4 == 5
+4 == 5 :: Bool
+GHCi> :t (+)
+(+) :: Num a => a -> a -> a
+```
