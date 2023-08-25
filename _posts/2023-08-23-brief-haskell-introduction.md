@@ -23,8 +23,8 @@ Church that is based on functions abstraction, applications, variable binding
 and substitution. This computational formal system  can be used to simulate any
 Turing Machine.
 
-![Light lambda img](/assets/img/2023-08-23-a-brief-haskell-introduction/lambda-light.png){: width="972" height="589" .light}
-![Dark lambda img](/assets/img/2023-08-23-a-brief-haskell-introduction/lambda-dark.png){: width="972" height="589" .dark}
+![Light lambda img](/assets/img/2023-08-23-brief-haskell-introduction/lambda-light.png){: width="972" height="589" .light}
+![Dark lambda img](/assets/img/2023-08-23-brief-haskell-introduction/lambda-dark.png){: width="972" height="589" .dark}
 _Greek alphabet, lowercase lambda_
 
 ## Haskell
@@ -400,6 +400,7 @@ main = do
 {: file="~/Downloads/DummyError.hs" }
 
 ```haskell
+ghci> :cd ~/Downloads/
 ghci> :l DummyError.hs
 "[1 of 1] Compiling Main             ( DummyError.hs, interpreted )
 
