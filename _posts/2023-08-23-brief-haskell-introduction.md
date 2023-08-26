@@ -333,8 +333,6 @@ $$
 L : (L : (L : ( L : ( \cdot \ \cdot \ \cdot ))))
 $$
 
-Certainly, here's a rephrased version of your explanation:
-
 Moreover, the process of evaluating an infinite list inevitably demands an
 infinite duration. In the Haskell, generating an infinite
 list of numbers is remarkably simple:
