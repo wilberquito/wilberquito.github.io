@@ -68,7 +68,7 @@ ghci>
 
 You can use `ghci` as a calculator,
 
-```haskell
+```
 ghci> 2 + 5
 7
 ```
@@ -89,7 +89,7 @@ Lets create a script module call `Main.hs` and define the funcion `main`. The
 script module is under the download directory `~/Downloads`{: .filepath} for
 example.
 
-```haskell
+```
 main = do
   putStrLn "Hello Haskell!"
 ```
@@ -97,15 +97,15 @@ main = do
 
 To load the script module from any path we can do,
 
-```haskell
+```
 ghci> :cd ~/Downloads/
 ghci> :l Main.hs
 ghci> main
-"Hello Haskell!"
+Hello Haskell!
 ghci> :r
-"Ok, one module loaded."
+Ok, one module loaded.
 ghci> :q
-"Leaving GHCi."
+Leaving GHCi.
 ```
 
 ## Functions
@@ -121,7 +121,7 @@ $$ a - f(a, b) * c $$
 
 In Haskell function application is denoted by space, i.e.
 
-```haskell
+```
 ghci> a = 1 ; b = 2 ; c = 3 ; f = (+)
 ghci> a - f a b * c
 -8
@@ -138,7 +138,7 @@ allowed. In Haskell as in math, if we define a function $$f$$ that takes as an
 argument $$x$$, every evaluation of the application $$f(x)$$ return the same
 $$y$$.
 
-```haskell
+```
 ghci> double x = x * 2
 ghci> f        = double
 ghci> f 2
@@ -150,7 +150,7 @@ ghci> 4
 In Haskell functions are considered first-class citizens, which means they can
 be passed as arguments
 
-```haskell
+```
 ghci> double x      = x * 2
 ghci> computeBy f a = f a
 ghci> computeBy double 3
@@ -159,7 +159,7 @@ ghci> 6
 
 , or being returned as values.
 
-```haskell
+```
 ghci> double x  = x * 2
 ghci> double'   = double
 ghci> double' 2
@@ -173,7 +173,7 @@ There are basically two types of reductions, applicative reduction and normal
 reduction. After we continue, lets define two simple functions in the Haskell
 interpreter and application using the previous functions;
 
-```haskell
+```
 ghci> add1    = x + 1
 ghci> square  = x^2
 ```
@@ -190,7 +190,7 @@ Now, suppose we want to evaluate this lambda expression $$ S \ (A \ 2)$$
 expression. In Haskell this expression could be written as;
 
 
-```haskell
+```
 ghci> square (add1 2)
 ghci> 9
 ```
@@ -233,7 +233,7 @@ aligns with this principle as it generates the infinity number through
 recursive processes. On the contrary, the latter function consistently
 evaluates to zero, irrespective of its input value.
 
-```haskell
+```
 ghci> inf       = 1 + inf
 ghci> zero x    = 0
 ghci> zero inf
@@ -272,7 +272,7 @@ unevaluated expression. To show how the sharing work, lets define a function
 `square` that has one argument called `x`, we can also say that the function
 `square` has bounded the name `x`.
 
-```haskell
+```
 ghci> square x = x * x
 ```
 
@@ -339,7 +339,7 @@ Moreover, the process of evaluating an infinite list inevitably demands an
 infinite duration. In the Haskell, generating an infinite
 list of numbers is remarkably simple:
 
-```haskell
+```
 ghci> numbers = [1..]
 ```
 
@@ -349,7 +349,7 @@ interpreter remains unaffected and doesn't stall. However, **when we request the
 presentation of the list, we effectively compel the evaluation of the
 expression**. Consequently, as anticipated, the process comes to a halt:
 
-```haskell
+```
 ghci> numbers
 [1, 2, 3, 4, 5, 6, ...]
 ```
@@ -362,7 +362,7 @@ phenomenon in a Haskell context.
 In this instance, when the infinite list of numbers is employed as the second
 argument of function `f`, the interpreter proceeds without any issue:
 
-```haskell
+```
 ghci> numbers = [1..]
 ghci> f a b = a
 ghci> f (2 + 2) numbers
@@ -374,7 +374,7 @@ infinite list is passed as the first argument to function `f`, the
 interpreter will halt. This is a consequence of the
 evaluation mechanism for infinite lists.
 
-```haskell
+```
 ghci> numbers = [1..]
 ghci> f a b = a
 ghci> f numbers (2 + 2)
@@ -391,7 +391,7 @@ better way to refer to variables in Haskell is "values" or "names".
 Hence, attempting to modify any value's state as demonstrated in the following
 script module will lead to an error involving multiple bindings.
 
-```haskell
+```
 main = do
   let x = 1
       x = 2
@@ -399,10 +399,10 @@ main = do
 ```
 {: file="~/Downloads/DummyError.hs" }
 
-```haskell
+```
 ghci> :cd ~/Downloads/
 ghci> :l DummyError.hs
-"[1 of 1] Compiling Main             ( DummyError.hs, interpreted )
+[1 of 1] Compiling Main             ( DummyError.hs, interpreted )
 
 DummyError.hs:2:7: error:
     Conflicting definitions for ‘x’
@@ -410,7 +410,7 @@ DummyError.hs:2:7: error:
               DummyError.hs:3:7
   |
 2 |   let x = 1
-  |       ^^^^^."
+  |       ^^^^^.
 ```
 
 ## Types
@@ -422,8 +422,7 @@ Inconsistent use of types leads to type errors.
 What are types by the way?, intuitively, we can think of **types as sets of
 values and a set of allowed operations on those values**.
 
-Here you have some of the built-in types in Haskell:
-
+In Haskell, types are capitalized. Here you have some built-in types.
 
 |       Type        |          Literals          |                                  Use                                   |                  Operations                   |
 | :---------------: | :------------------------: | :--------------------------------------------------------------------: | :-------------------------------------------: |
@@ -444,17 +443,119 @@ Most of the times, Haskell by its own can infer the type of expressions, so we
 do not need to explicitly write out the types of our functions and expressions
 to get things done, e.g.
 
-```haskell
-GHCi> :t 'a'
+```
+ghci> :t 'a'
 'a' :: Char
-GHCi> :t True
+ghci> :t True
 True :: Bool
-GHCi> :t "HELLO!"
-"HELLO!" :: [Char]
-GHCi> :t (True, 'a')
+ghci> :t "HELLO!"
+HELLO!" :: [Char]
+ghci> :t (True, 'a')
 (True, 'a') :: (Bool, Char)
-GHCi> :t 4 == 5
+ghci> :t 4 == 5
 4 == 5 :: Bool
-GHCi> :t (+)
+ghci> :t (+)
 (+) :: Num a => a -> a -> a
 ```
+
+**Many of the type's operations are defined for a big group of types in a
+typeclass**. A typeclass is a sort of interface that defines some
+behavior. If a type is an instance of a typeclass, then that type supports and
+implements the behavior that the typeclass describes.
+
+Lets see for example, the equal operation and how multiple types define this
+operation. It make sense to compare String with String and Int with and Int,
+but no a String with an Int, right?
+
+```
+ghci> "hello" == "hello"
+True
+ghci> "Hello" == "hellO"
+False
+ghci> 1 == 1
+True
+ghci> 1 == 0
+False
+```
+
+But when we want to compare different types, Haskell compiler blame us:
+
+```
+ghci> 1 == "one"
+
+<interactive>:5:1: error:
+    • No instance for (Num String) arising from the literal ‘1’
+    • In the first argument of ‘(==)’, namely ‘1’
+      In the expression: 1 == "one"
+      In an equation for ‘it’: it = 1 == "one"
+```
+
+Why is that?, well to reason about it, lets ask to Haskell compiler information
+about the `(==)` operator.
+
+```
+ghci> :i (==)
+type Eq :: * -> Constraint
+class Eq a where
+  (==) :: a -> a -> Bool
+  ...
+        -- Defined in ‘GHC.Classes’
+infix 4 ==
+```
+
+The `(==)` operator functions as a binary operator, defined in the typeclass
+`Eq`. The operator accepts two arguments of the type `a` and yields a `Bool`
+result. **What is the implication of `a` in this context?** It serves as a
+**type variable** or **type placeholder**, signifying that the provided
+argument can assume any type, given the absence of specific type constraints in
+this case.
+
+Alright, we have now established the existence of this typeclass. However, it's
+intriguing to understand how the `Int` and `String` types are able to exhibit
+the characteristics outlined in the `Eq` typeclass. This phenomenon is achieved
+through a procedure known as **instantiation**, which we'll delve into in a
+future article.
+
+For now, it is enough if you know that these types are instances of `Eq`.
+And if you do not believe us, we can ask the compiler, e.g.
+
+```
+ghci> :i Int
+type Int :: *
+data Int = GHC.Types.I# GHC.Prim.Int#
+        -- Defined in ‘GHC.Types’
+instance Eq Int -- Defined in ‘GHC.Classes’
+instance Ord Int -- Defined in ‘GHC.Classes’
+instance Enum Int -- Defined in ‘GHC.Enum’
+instance Num Int -- Defined in ‘GHC.Num’
+instance Real Int -- Defined in ‘GHC.Real’
+instance Show Int -- Defined in ‘GHC.Show’
+instance Read Int -- Defined in ‘GHC.Read’
+instance Bounded Int -- Defined in ‘GHC.Enum’
+instance Integral Int -- Defined in ‘GHC.Real’
+```
+
+The signature `instance Eq Int` explicitly informs us that any value of type
+`Int` can use the behaviors defined in the class `Eq`.
+
+## Resume
+
+This article provides an overview of an alternative programming paradigm,
+focusing on the renowned programming language Haskell, in contrast to the
+conventional von Neumann programming approach. In the von Neumann style,
+variables and control flow simulate computer architecture. In contrast,
+Functional Programming, deeply rooted in Lambda Calculus, offers a distinct
+approach. Haskell serves as a prime example of this approach, emphasizing
+principles such as purity, immutability, and a strong mathematical foundation.
+
+In Haskell, functions closely resemble mathematical functions, ensuring
+uniformity and predictability. The language supports advanced features like
+higher-order capabilities, order reduction, and lazy evaluation, all of which
+contribute to optimizing efficiency in program execution.
+
+Rather than traditional mutable variables, Haskell employs immutable
+"variables" as values or names. Its type system actively enforces type safety,
+with support for type inference. The concept of typeclasses defines specific
+behaviors, such as the `Eq` typeclass for equality comparison. Notably, types
+that become instances of these typeclasses, inheriting their
+associated behaviors.
