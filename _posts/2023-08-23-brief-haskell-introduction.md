@@ -478,7 +478,7 @@ ghci> 1 == 0
 False
 ```
 
-But when we want to compare different types, Haskell compiler blame us:
+But if you try to compare different types, Haskell compiler will blame you:
 
 ```
 ghci> 1 == "one"
@@ -517,7 +517,7 @@ through a procedure known as **instantiation**, which we'll delve into in a
 future article.
 
 For now, it is enough if you know that these types are instances of `Eq`.
-And if you do not believe us, we can ask the compiler, e.g.
+And if you do not believe it, we can ask the compiler, e.g.
 
 ```
 ghci> :i Int
