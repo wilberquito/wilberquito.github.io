@@ -1,8 +1,8 @@
 ---
-title: Constraint Satisfaction using MiniZinc
+title: Constraint Satisfaction, Colouring Problem
 author: wilberquito
 date: 2024-06-14 11:33:00 +0800
-categories: [Programming, MiniZinc]
+categories: [Declarative Programming, MiniZinc]
 tags: [programming, modelling, math, constraint satisfaction]
 pin: true
 math: true
