@@ -12,7 +12,7 @@
   noblank: true # open link in current tab
 
 - type: url
-  icon: 'fas fa-feather'   # icons powered by <https://fontawesome.com/>
+  icon: 'fas fa-link'   # icons powered by <https://fontawesome.com/>
   url:  'https://wilberquito.github.io'                  # Fill with your Linkedin homepage
 
 
