@@ -1,7 +1,7 @@
 ---
 title: Categorical data and Encoding
 author: wilberquito
-date: 2024-31-05 15:33:00 +0800
+date: 2024-05-31 15:33:00 +0800
 categories: [Machine Learning, Encoding]
 tags: [programming, encoding, onehot, embedding]
 pin: true
