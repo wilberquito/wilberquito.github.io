@@ -249,6 +249,9 @@ import torchvision
 from torchvision.datasets import FashionMNIST
 from torchvision import transforms
 
+# Path to the folder where the datasets are/should be downloaded (e.g. MNIST)
+DATASET_PATH = "../data"
+
 # Transformations applied on each image => first make them a tensor, then normalize them in the range -1 to 1
 transform = transforms.Compose(
     [transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))]
