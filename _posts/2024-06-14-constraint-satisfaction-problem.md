@@ -1,5 +1,5 @@
 ---
-title: Constraint Satisfaction, Colouring Problem
+title: Constraint satisfaction and the colouring problem
 author: wilberquito
 date: 2024-06-14 11:33:00 +0800
 categories: [Declarative Programming, MiniZinc]

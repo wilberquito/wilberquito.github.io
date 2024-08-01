@@ -1,8 +1,8 @@
 ---
-title: Categorical data and Encoding
+title: Categorical data and encoding
 author: wilberquito
 date: 2024-07-31 15:33:00 +0800
-categories: [Machine Learning, Encoding]
+categories: [Machine Learning, Bases]
 tags: [programming, encoding, onehot, embedding]
 pin: true
 math: true
