@@ -9,6 +9,7 @@ math: true
 mermaid: true
 ---
 
+You can find the original notebook [here](https://github.com/wilberquito/Hands-On-ML/blob/main/uvadlc_notebooks/activation-functions-and-vanishing-gradient-problem.ipynb).
 
 In this tutorial we will take a closer look at (popular)
 activation functions and their effect on optimization properties in neural networks.
