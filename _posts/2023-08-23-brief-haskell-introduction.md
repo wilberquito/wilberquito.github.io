@@ -1,5 +1,5 @@
 ---
-title: Brief Haskell Introduction
+title: Haskell introduction
 author: wilberquito
 date: 2023-08-23 11:33:00 +0800
 categories: [Declarative Programming, Haskell]

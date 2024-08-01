@@ -1,5 +1,5 @@
 ---
-title: A Glorified Personal Dotfiles
+title: A glorified personal dotfiles
 author: wilberquito
 date: 2023-08-20 11:33:00 +0800
 categories: [Technology, Linux]
