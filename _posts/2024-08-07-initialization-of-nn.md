@@ -9,7 +9,7 @@ math: true
 mermaid: true
 ---
 
-> Check out the original notebook [here](https://github.com/wilberquito/Hands-On-ML/blob/main/uvadlc_notebooks/initialization-of-nn.ipynb){:target="_blank"}.
+> *Check out the original notebook [here](https://github.com/wilberquito/Hands-On-ML/blob/main/uvadlc_notebooks/initialization-of-nn.ipynb){:target="_blank"}.*
 {: .prompt-info }
 
 *Why is initialization essential to deep networks?* It turns out that if you do it wrong, **it can lead to exploding or vanishing weights and gradients**. That means that either the weights of the model explode to infinity, or they vanish to 0. And the deeper the network, the harder it becomes to keep the weights at reasonable values. We’ll see why that’s the case in the following sections. And the deeper the network, the harder it becomes to keep the weights at reasonable values.
