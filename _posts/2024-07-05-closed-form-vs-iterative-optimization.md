@@ -9,7 +9,7 @@ math: true
 mermaid: true
 ---
 
-> Check out the original notebook [here](https://github.com/wilberquito/Hands-On-ML/blob/main/bases/closed-form-vs-iterative-optimization/closed-form-vs-iterative-optimization.ipynb){:target="_blank"}.
+> *Check out the original notebook [here](https://github.com/wilberquito/Hands-On-ML/blob/main/bases/closed-form-vs-iterative-optimization/closed-form-vs-iterative-optimization.ipynb){:target="_blank"}.*
 {: .prompt-info }
 
 
