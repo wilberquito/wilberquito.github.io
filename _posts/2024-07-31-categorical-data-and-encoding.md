@@ -10,6 +10,8 @@ mermaid: true
 ---
 
 > Check out the original notebook [here](https://github.com/wilberquito/Hands-On-ML/blob/main/uvadlc_notebooks/categorical-data-and-encoding.ipynb){:target="_blank"}.
+{: .prompt-info }
+
 
 Categorical data requires special care. Data like language characters ‘a’, ‘b’, ‘c’ etc. are usually represented as integers 0, 1, 2, etc. Do not use integers as input for categorical data. If you would enter those integers as inputs to the model, two problems arise.
 

@@ -10,6 +10,8 @@ mermaid: true
 ---
 
 > Check out the original notebook [here](https://github.com/wilberquito/Hands-On-ML/blob/main/bases/closed-form-vs-iterative-optimization/closed-form-vs-iterative-optimization.ipynb){:target="_blank"}.
+{: .prompt-info }
+
 
 Normaly there are two ways to train a model. Using a "closed form" equation, i.e., a equation composed by a finite number of constants, variables and operations, there are no inifinite sums, no limits, no integrals, etc.
 
