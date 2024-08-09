@@ -10,27 +10,26 @@ mermaid: true
 ---
 
 > Check out the original notebook [here](https://github.com/wilberquito/Hands-On-ML/blob/main/uvadlc_notebooks/initialization-of-nn.ipynb){:target="_blank"}.
+{: .prompt-info }
 
-*Why is initialization essential to deep networks?* It turns out that if you do it wrong, **it can lead to exploding or vanishing weights and gradients**. That means that either the weights of the model explode to infinity, or they vanish to 0. And the deeper the network, the harder it becomes to keep the weights at reasonable values. We’ll see why that’s the case in the following sections.And the deeper the network, the harder it becomes to keep the weights at reasonable values.
+*Why is initialization essential to deep networks?* It turns out that if you do it wrong, **it can lead to exploding or vanishing weights and gradients**. That means that either the weights of the model explode to infinity, or they vanish to 0. And the deeper the network, the harder it becomes to keep the weights at reasonable values. We’ll see why that’s the case in the following sections. And the deeper the network, the harder it becomes to keep the weights at reasonable values.
 
 When initializing a neural network, there are a few properties we would like to have.
 
 1) The variance of the input should be propagated through the model to the last layer.
-It means, the std deviation for the output neurons should be similar to the
+It means, the *std* for the output neurons should be similar to the
 rest of the layers of the neural network.
 
 2) The variance of the gradient distribution should be equal across layers. Hence, all weight on all layer would be capable of being updated.
 
 
 ```python
-## Standard libraries
 import os
 import json
 import math
 import numpy as np
 import copy
 
-## Imports for plotting
 import matplotlib.pyplot as plt
 from matplotlib import cm
 %matplotlib inline
@@ -39,10 +38,7 @@ set_matplotlib_formats('svg', 'pdf') # For export
 import seaborn as sns
 sns.set()
 
-## Progress bar
 from tqdm.notebook import tqdm
-
-## PyTorch
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -210,7 +206,6 @@ model
 ```python
 ##############################################################
 
-
 def plot_dists(val_dict, color="C0", xlabel=None, stat="count", use_kde=True):
     columns = len(val_dict)
     fig, ax = plt.subplots(1, columns, figsize=(columns * 3, 2.5))
@@ -239,9 +234,7 @@ def plot_dists(val_dict, color="C0", xlabel=None, stat="count", use_kde=True):
     fig.subplots_adjust(wspace=0.4)
     return fig
 
-
 ##############################################################
-
 
 def visualize_weight_distribution(model, color="C0"):
     weights = {}
@@ -257,9 +250,7 @@ def visualize_weight_distribution(model, color="C0"):
     plt.show()
     plt.close()
 
-
 ##############################################################
-
 
 def visualize_gradients(model, color="C0", print_variance=False):
     """
@@ -297,9 +288,7 @@ def visualize_gradients(model, color="C0", print_variance=False):
         for key in sorted(grads.keys()):
             print(f"{key} - Variance: {np.var(grads[key])}")
 
-
 ##############################################################
-
 
 def visualize_activations(model, color="C0", print_variance=False):
     model.eval()
@@ -327,22 +316,18 @@ def visualize_activations(model, color="C0", print_variance=False):
     if print_variance:
         for key in sorted(activations.keys()):
             print(f"{key} - Variance: {np.var(activations[key])}")
-
-
-##############################################################
 ```
 
 ## Constant initialization
 
 The first initialization we can consider is to initialize all weights with the same constant value. Zero is not a good idea as the propagated gradient would be zero,
-but what if we initialize it slighly larger or smaller than zero?
+but what if we initialize it slightly larger or smaller than zero?
 
 
 ```python
 def const_init(model, c=0.0):
     for _, param in model.named_parameters():
         param.data.fill_(c)
-
 
 model = BaseNetwork(act_fn=Identity()).to(device)
 const_init(model, c=5e-03)
@@ -424,15 +409,15 @@ visualize_activations(model, print_variance=True)
     Layer 8 - Variance: 14.831441879272461
 
 
-The gradients of layers (.2, .4 and .6) are basically the same. It seams that is zero but it is a value very close to it.
-This is a big problem because those neurons were initialated with the same value and the gradients after backprop are basicaly the same,
-which mean that those layers and neurons will learn the same features, there is a symmetry which is not desirable because it reduces the model's capability to learn diverses features.
+The gradients of layers *[2, 4 and 6]* are basically the same. It seams that is zero but it is a value very close to it.
+This is a big problem because those neurons were initialized with the same value and the gradients after back-propagation are basically the same,
+which *mean* that those layers and neurons will learn the same features learning, there is a symmetry which is not desirable because it reduces the model's capability to learn diverse features.
 
-Furthermore, the variance of the activations are slighly different. And we are looking to maintein the flux of the varience through the network.
+Furthermore, the variance of the activations are slightly different. And we are looking to maintain the flux of the variance through the network.
 
 ## Constant variance
 
-Constant initialization did not work, what if we randomly initializate the weights using a gaussian distribution?
+Constant initialization did not work, what if we randomly initialize the weights using a gaussian distribution?
 
 
 ```python
@@ -500,42 +485,43 @@ We need to sample the weights from a distribution, but we are not sure which one
 We will try to find an optimal initialization from the activation distribution perspective.
 The are two requirements:
 
-1) The mean of every activation should be zero (**not all activation functions generate a mean of zero, e.g., ReLU!!**)
-2) The varience of the activations should stay the same across every layer
+1) The *mean* of every activation should be zero (**not all activation functions generate a mean of zero, e.g., ReLU!!**)
 
-Lets say that we want to desing an initialization for the following layer $l$:
+2) The variance of the activations should stay the same across every layer
+
+Lets say that we want to design an initialization for the following layer $l$:
 
  $$y_{l} = W_{l}x_{l} + b_{l}, \quad y_{l} \in \mathbb{R}^{d_y}, \quad x_{l} \in \mathbb{R}^{d_x}$$
 
 Where:
 - $x_{l}$ is a $n_{l}-by-1$ vector that represents the activations of the previous layer $y_{l-1}$ that were passed through an activation function $f$, i.e., $x_{l} = f(y_{l-1})$.
-- $W_{l}$ is a $d_{l}-by-n_{l}$ matrix of all connections (weights) from layer $l-1$ and layer $l$.
-- $b_{l}$ is a vector of biases of layer $l$ (usually initalizated at 0).
+- $W_{l}$ is a $d_{l}-by-n_{l}$ matrix of all connections (weights) from layer  $l-1$ and layer $l$.
+- $b_{l}$ is a vector of biases of layer $l$ (usually initialized at 0).
 - and $y_{l}$ is the vector of the activations before passing through the activation function.
 
 
-There are some hyphotesis made on those vectors and matrixes:
+There are some hypothesis made on those vectors and matrixes:
 
 - The initialization of elements in $W_{l}$ are independent and share the same distribution.
 - Likewise, elements of $x_{l}$ are mutually independent and share the same distribution.
 - $x_{l}$ and $W_{l}$ are mutually independent.
 
-Our goal is that the variance of $y_l$ is the same as the input, i.e. $Var(y_l) = Var(x_l) = \sigma_x^2$ and a mean of zero, i.e. $\mu = 0$. We asume that $x_{l}$ has a $\mu = 0$
+Our goal is that the variance of $y_l$ is the same as the input, i.e. $Var(y_l) = Var(x_l) = \sigma_x^2$ and a *mean* of zero, i.e. $\mu = 0$. We assume that $x_{l}$ has a $\mu = 0$
 as result of passing through the activation function $f$ and we do not take into account the vector bias $b$ because all of them will be initialized to zero.
 
 $$
 Var(y_l)= Var(W_{l}x_{l}) = \sigma_{x_l}^2
 $$
 
-
 Lets reduce the problem and study the output of a neuron $i$ in layer $l$ without the term bias $b$:
 
 $$y_i^l = \sum_{j}w_{ij}^{l}x_{j}^{l}$$
 
-The input and output of the neuron should also respect the variance constraint $\sigma^2_{x_l}$.
+
+For every single layer $l$ in the set of layers $\mathcal{L}$ this must hold; *the input and output of the neurons should respect the variance constraint $\sigma^2_{x_l}$*.
 
 $$
-Var(y_i^l)= Var(\sum_{j}w_{ij}x_{j}) = \sigma_{x_l}^2
+Var(y_i)= Var(\sum_{j}w_{ij}x_{j}) = \sigma_{x_l}^2
 $$
 
 $j$ here represents the number of activations from previous layer. Notice that in the first layer it $max(j)$ is equal to the number of features.
