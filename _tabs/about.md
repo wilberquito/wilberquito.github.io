@@ -5,7 +5,7 @@ order: 4
 ---
 
 
-### Hey there!
+<h4> Hey there!</h4>
 
 
 Welcome to my corner of the internet. This blog is where I share my passion for math, computer science and tech. Dive in, and you'll find a mix of my work, ideas, and interests that keep me buzzing.
@@ -16,4 +16,4 @@ Now, do you want to see something really cool? Imagine exploring this blog post 
 
 <br>
 
-__*Nothing good gets away.*__
+> *If it is right, it happens — The main thing is not to hurry. Nothing good gets away.*
