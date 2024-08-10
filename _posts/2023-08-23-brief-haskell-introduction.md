@@ -7,25 +7,26 @@ tags: [programming, fp, haskell, math]
 pin: true
 math: true
 mermaid: true
+image:
+  path: /assets/img/2023-08-23-brief-haskell-introduction/lambda-light.png
+  alt: Greek alphabet, lowercase lambda.
 ---
 
-*"Can programming be liberated from the von Neumann style?"*
+> *Can programming be liberated from the von Neumann style?*
 
 Von Neumann programming languages, aka "imperative programming languages" use
 variables to imitate the computer's storage cells; control statements elaborate
 its jump and test instructions; and assignment statements imitate its fetching,
 storing, and arithmetic.
 
-Is there any good alternative to this?, yes there is! FP (functional
-programming) is programming paradigm based on the principles of "Lambda
+Is there any good alternative to this?, yes there is! functional
+programming (FP) is programming paradigm based on the principles of "Lambda
 Calculus". Lambda Calculus is a computational formal system developed by Alonzo
 Church that is based on functions abstraction, applications, variable binding
 and substitution. This computational formal system  can be used to simulate any
 Turing Machine.
 
-![Light lambda img](/assets/img/2023-08-23-brief-haskell-introduction/lambda-light.png){: width="972" height="589" .light}
-![Dark lambda img](/assets/img/2023-08-23-brief-haskell-introduction/lambda-dark.png){: width="972" height="589" .dark}
-_Greek alphabet, lowercase lambda_
+
 
 ## Haskell
 

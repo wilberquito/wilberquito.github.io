@@ -7,9 +7,14 @@ tags: [programming, modelling, math, constraint satisfaction]
 pin: true
 math: true
 mermaid: true
+image:
+  path: /assets/img/2024-06-14-constraint-satisfaction-problem/states-map.jpg
+  alt: Australia states and the colouring problem.
 ---
 
 ## What is Constraint Satisfaction Problem?
+
+
 
 A Constraint Satisfaction Problem (CSP) consists of:
 
@@ -32,7 +37,6 @@ all of the variables; in this case we speak about Constraint Optimisation Proble
 
 ## Colouring Australia States
 
-![Aust img](/assets/img/2024-06-14-constraint-satisfaction-problem/aust.svg){: width="972" height="589" .w-50 .light .right}
 ![Aust img](/assets/img/2024-06-14-constraint-satisfaction-problem/aust.svg){: width="972" height="589" .w-50 .dark .right}
 
 Imagine that we wish to colour a map of Australia as shown in the next figure.
