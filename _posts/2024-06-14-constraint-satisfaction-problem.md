@@ -9,7 +9,7 @@ math: true
 mermaid: true
 image:
   path: /assets/img/2024-06-14-constraint-satisfaction-problem/states-map.jpg
-  alt: Australia states and the colouring problem.
+  alt: Australia states and the colouring problem
 ---
 
 ## What is Constraint Satisfaction Problem?

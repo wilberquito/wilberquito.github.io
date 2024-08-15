@@ -9,7 +9,7 @@ math: true
 mermaid: true
 image:
   path: /assets/img/2023-08-23-brief-haskell-introduction/lambda-light.png
-  alt: Greek alphabet, lowercase lambda.
+  alt: Greek alphabet, lowercase lambda
 ---
 
 > *Can programming be liberated from the von Neumann style?*
