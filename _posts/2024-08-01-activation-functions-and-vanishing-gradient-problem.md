@@ -9,7 +9,7 @@ math: true
 mermaid: true
 image:
     path: /assets/img/2024-08-01-activation-functions-and-vanishing-gradient-problem/activation-functions-and-vanishing-gradient-problem_11_0.svg
-    alt: Activation functions against gradients.
+    alt: Activation functions against gradients
 ---
 
 > *Check out the original notebook [here](https://github.com/wilberquito/Hands-On-ML/blob/main/uvadlc_notebooks/activation-functions-and-vanishing-gradient-problem.ipynb){:target="_blank"}.*
