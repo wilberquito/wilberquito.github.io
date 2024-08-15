@@ -7,6 +7,9 @@ tags: [xeus cling, jupyter kernel, jupyter, notebook, C++, docker]
 pin: true
 math: true
 mermaid: true
+image:
+    path: /assets/img/2024-08-14-harnessing-the-power-of-cpp-in-jupyter-notebooks-with-xeus-cling/cpp-kernels-running.png
+    alt: C++ kernels running on Jupyter Notebooks
 ---
 
 Hey everyone! I’m thrilled to share an amazing discovery I made recently. Let
