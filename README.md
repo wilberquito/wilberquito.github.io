@@ -4,7 +4,7 @@
 
 Sign in to GitHub and [**use this template**][use-template] to generate a brand new repository and name it `USERNAME.github.io`, where `USERNAME` represents your GitHub username.
 
-Then clone it to your local machine and run:
+Then clone it to your local machine, and execute the instructions below.
 
 ```
 $ bundle
@@ -23,7 +23,7 @@ $ bundle exec jekyll clean
 ```
 
 ```
-$ bundle exec jekyll buld
+$ bundle exec jekyll build
 ```
 
 ```
