@@ -32,7 +32,7 @@ $ bundle exec jekyll serve
 
 ## Track blog
 
-https://wilberquito.goatcounter.com/
+https://wilberquito.goatcounter.com
 
 ## For starters
 
