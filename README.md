@@ -1,5 +1,9 @@
 # Chirpy Starter [![Gem Version](https://img.shields.io/gem/v/jekyll-theme-chirpy)](https://rubygems.org/gems/jekyll-theme-chirpy) [![GitHub license](https://img.shields.io/github/license/cotes2020/chirpy-starter.svg?color=blue)][mit]
 
+## Track blog
+
+https://wilberquito.goatcounter.com
+
 ## Installation
 
 Sign in to GitHub and [**use this template**][use-template] to generate a brand new repository and name it `USERNAME.github.io`, where `USERNAME` represents your GitHub username.
@@ -29,10 +33,6 @@ $ bundle exec jekyll build
 ```
 $ bundle exec jekyll serve
 ```
-
-## Track blog
-
-https://wilberquito.goatcounter.com
 
 ## For starters
 
