@@ -2,8 +2,8 @@
 title: Constraint satisfaction and the colouring problem
 author: wilberquito
 date: 2024-06-14 11:33:00 +0800
-categories: [Declarative Programming, MiniZinc]
-tags: [programming, modelling, math, constraint satisfaction]
+categories: [Programming, MiniZinc]
+tags: [declarative programming, modelling, math, constraint satisfaction]
 pin: true
 math: true
 mermaid: true

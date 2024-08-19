@@ -4,7 +4,7 @@ author: wilberquito
 date: 2024-06-14 11:33:00 +0800
 categories: [Machine Learning, Regressor]
 tags: [programming, linear modeling, math, statistics]
-pin: true
+pin: false
 math: true
 mermaid: true
 ---
@@ -771,5 +771,3 @@ plt.show()
 
 
 ![png](/assets/img/2024-06-18-lifesat-linear-regressor/Life-Satisfaction_32_0.png)
-
-
