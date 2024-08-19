@@ -64,7 +64,7 @@ And not all algorithms have the same complexity nor problems are of the same com
 
 ## Template for programs
 
-```cpp
+```c++
 #include <iostream>
 
 #ifdef _WIN32
@@ -94,7 +94,7 @@ most common work statations, aka, Windows.
 
 Let's brake it in different sections to understand what it does:
 
-```cpp
+```c++
 #ifdef _WIN32
     #include <windows.h>
 #endif
@@ -104,7 +104,7 @@ This piece of code is only taken into account if a C++ compiler for Windows is d
 If a C++ compiler for Windows is detected it includes the library `windows.h` which defines
 a very large number of Windows specific functions that can be used in C or C++.
 
-```cpp
+```c++
 #ifdef _WIN32
     SetConsoleOutputCP( 1252 );
     SetConsoleCP( 1252 );
@@ -182,7 +182,7 @@ it by the specfic namespace because to avoid naming conflicts.
 In this case, we can import all the code from the standard
 library instead of using it intentionaly the the use of `::` as follows:
 
-```cpp
+```c++
 using namespace std;
 ```
 
