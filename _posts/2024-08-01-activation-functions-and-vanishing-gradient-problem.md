@@ -4,7 +4,7 @@ author: wilberquito
 date: 2024-08-01 15:33:00 +0800
 categories: [Machine Learning, Bases]
 tags: [activation functions, vanishing gradient problem]
-pin: true
+pin: false
 math: true
 mermaid: true
 image:

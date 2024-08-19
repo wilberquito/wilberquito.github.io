@@ -4,7 +4,7 @@ author: wilberquito
 date: 2024-07-31 15:33:00 +0800
 categories: [Machine Learning, Bases]
 tags: [programming, encoding, onehot, embedding]
-pin: true
+pin: false
 math: true
 mermaid: true
 ---

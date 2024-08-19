@@ -2,9 +2,9 @@
 title: Haskell introduction
 author: wilberquito
 date: 2023-08-23 11:33:00 +0800
-categories: [Declarative Programming, Haskell]
-tags: [programming, fp, haskell, math]
-pin: true
+categories: [Programming, Haskell]
+tags: [declarative programming, fp, haskell, math]
+pin: false
 math: true
 mermaid: true
 image:
