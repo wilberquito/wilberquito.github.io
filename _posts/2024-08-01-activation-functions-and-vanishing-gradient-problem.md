@@ -26,6 +26,12 @@ During the training process of the neural network, the goal is to minimize a los
 Activation functions, such as sigmoid and hyperbolic tangent, are responsible for introducing non-linearity into the DNN model. However, these functions suffer from the saturation problem, where the gradients become close to zero for large or small inputs, contributing to the vanishing gradient problem.
 
 
+
+<details markdown="1">
+
+<summary><i>Hidden code</i></summary>
+
+
 ```python
 ## Standard libraries
 import os
@@ -80,12 +86,13 @@ print("Using device", device)
 
     Using device cuda:0
 
-## Common activation functions
+</details>
+
+## Activation functions definition
 
 
 ```python
 class ActivationFunction(nn.Module):
-
     def __init__(self):
         super().__init__()
         self.name = self.__class__.__name__
@@ -93,26 +100,22 @@ class ActivationFunction(nn.Module):
 
 
 class Sigmoid(ActivationFunction):
-
     def forward(self, x):
         return 1 / (1 + torch.exp(-x))
 
 
 class Tanh(ActivationFunction):
-
     def forward(self, x):
         x_exp, neg_x_exp = torch.exp(x), torch.exp(-x)
         return (x_exp - neg_x_exp) / (x_exp + neg_x_exp)
 
 
 class ReLU(ActivationFunction):
-
     def forward(self, x):
         return x * (x > 0).float()
 
 
 class LeakyReLU(ActivationFunction):
-
     def __init__(self, alpha=0.1):
         super().__init__()
         self.config["alpha"] = alpha
@@ -122,19 +125,14 @@ class LeakyReLU(ActivationFunction):
 
 
 class ELU(ActivationFunction):
-
     def forward(self, x):
         return torch.where(x > 0, x, torch.exp(x) - 1)
 
 
 class Swish(ActivationFunction):
-
     def forward(self, x):
         return x * torch.sigmoid(x)
-
 ```
-
-## Visualizing activation functions
 
 
 ```python
@@ -148,8 +146,12 @@ act_fn_by_name = {
 }
 ```
 
-We can visualize the activation functions against their gradients:
+Let's visualize the activation functions against their gradients.
 
+
+<details markdown="1">
+
+<summary><i>Hidden code</i></summary>
 
 ```python
 def get_grads(act_fn, x):
@@ -169,7 +171,6 @@ def get_grads(act_fn, x):
     out.sum().backward()  # Summing results in an equal gradient flow to each element in x
     return x.grad  # Accessing the gradients of x by "x.grad"
 
-
 def vis_act_fn(act_fn, x, ax):
     # Run activation function
     y = act_fn(x)
@@ -183,13 +184,12 @@ def vis_act_fn(act_fn, x, ax):
     ax.legend()
     ax.set_ylim(-1.5, x.max())
 
+```
+</details>
 
-# Add activation functions if wanted
+```python
 act_fns = [act_fn() for act_fn in act_fn_by_name.values()]
-x = torch.linspace(
-    -5, 5, 1000
-)  # Range on which we want to visualize the activation functions
-## Plotting
+x = torch.linspace(-5, 5, 1000)
 rows = math.ceil(len(act_fns) / 3.0)
 fig, ax = plt.subplots(rows, 3, figsize=(13, rows * 3))
 for i, act_fn in enumerate(act_fns):
@@ -307,6 +307,9 @@ plt.close()
 
 
 
+<details markdown="1">
+
+<summary><i>Hidden code</i></summary>
 
 ```python
 def visualize_gradients(net, color="C0"):
@@ -353,6 +356,8 @@ def visualize_gradients(net, color="C0"):
     plt.close()
 ```
 
+</details>
+
 
 ```python
 # Seaborn prints warnings if histogram has small values. We can ignore them for now
@@ -361,9 +366,7 @@ import warnings
 warnings.filterwarnings("ignore")
 ## Create a plot for every activation function
 for i, act_fn_name in enumerate(act_fn_by_name):
-    set_seed(
-        42
-    )  # Setting the seed ensures that we have the same weight initialization for each activation function
+    set_seed(42)
     act_fn = act_fn_by_name[act_fn_name]()
     net_actfn = BaseNetwork(act_fn=act_fn).to(device)
     visualize_gradients(net_actfn, color=f"C{i}")
