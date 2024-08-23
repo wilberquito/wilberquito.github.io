@@ -427,10 +427,9 @@ main();
 
 **QUESTION: This algorithm only yields prime factors (an not non-prime factors). Why?**
 
-<details>
-    <summary><i>Answer:</i></summary>
+<details markdown="1">
 
-<br>
+<summary><i>Answer:</i></summary>
 
 
 The algorithm starts with $d = 2$, the smallest prime number.
@@ -439,4 +438,5 @@ If $n$ is divisible by $d$, $d$ is a factor and is printed. After dividing $n$ b
 The key point is that once all factors of $d = 2$ are extracted, $d$ is incremented to $3$, then $4$, and so on. If $d$ is a composite number (e.g., 4), by the time the algorithm reaches $d$, all smaller prime factors (e.g., 2) have already been extracted from $n$.
 
 Therefore, $n$ is no longer divisible by composite numbers like 4, 6, 8, etc., because those would have been divisible by smaller primes that were already factored out.
+
 </details>
