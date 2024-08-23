@@ -10,9 +10,13 @@ mermaid: true
 ---
 
 
+<details markdown="1">
+
+<summary><i>Hidden code</i></summary>
+
+
 ```python
 from os.path import join
-
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -26,11 +30,12 @@ sns.set_style("whitegrid")
 sns.set_palette("viridis")
 ```
 
+</details>
+
 
 ```python
 data_root = "https://github.com/ageron/data/raw/main/"
 lifesat = pd.read_csv(join(data_root, "lifesat", "lifesat.csv"))
-
 lifesat.sort_values(by="Life satisfaction", ascending=False)
 ```
 
@@ -233,7 +238,6 @@ lifesat.sort_values(by="Life satisfaction", ascending=False)
 ```python
 X = lifesat[["GDP per capita (USD)"]].values
 y = lifesat[["Life satisfaction"]].values
-
 X.shape, y.shape
 ```
 
@@ -359,6 +363,11 @@ If both **GDP per capita** and **Life satisfaction** follow a normal distributio
 We can know that a feature follows a Gaussian distribution by plotting them (and see if they follow a normal distribution) or with statistical tests.
 
 
+<details markdown="1">
+
+<summary><i>Hidden code</i></summary>
+
+
 ```python
 fig, axes = plt.subplots(1, 2, figsize=(9, 3))
 
@@ -371,6 +380,8 @@ axes[1].set_title("Life satisfaction")
 plt.tight_layout()
 plt.show()
 ```
+
+</details>
 
 
 
@@ -555,6 +566,10 @@ err
 
 
 
+<details markdown="1">
+
+<summary><i>Hidden code</i></summary>
+
 ```python
 fig, ax = plt.subplots(1, 1, figsize=(6, 4))
 
@@ -568,6 +583,8 @@ ax.set_ylabel("Life satisfaction")
 
 plt.show()
 ```
+
+</details>
 
 
 
@@ -591,6 +608,9 @@ X_train.shape, X_test.shape, y_train.shape, y_test.shape
     ((21, 1), (6, 1), (21, 1), (6, 1))
 
 
+<details markdown="1">
+
+<summary><i>Hidden code</i></summary>
 
 
 ```python
@@ -606,6 +626,8 @@ ax.set_ylabel("Life satisfaction")
 
 plt.show()
 ```
+
+</details>
 
 
 
@@ -667,6 +689,10 @@ yhat_train[:5]
 
 
 
+<details markdown="1">
+
+<summary><i>Hidden code</i></summary>
+
 
 ```python
 fig, ax = plt.subplots(1, 1, figsize=(6, 4))
@@ -682,6 +708,8 @@ ax.set_ylabel("Life satisfaction")
 
 plt.show()
 ```
+
+</details>
 
 
 
@@ -709,6 +737,11 @@ yhat_test[:5]
 In the following figure we can appreciate the predicted values which are projected in the regression line vs the real values gave by the test dataset.
 
 
+<details markdown="1">
+
+<summary><i>Hidden code</i></summary>
+
+
 ```python
 fig, ax = plt.subplots(1, 1, figsize=(6, 4))
 
@@ -732,11 +765,17 @@ ax.set_ylabel("Life satisfaction")
 plt.show()
 ```
 
+</details>
+
 
 
 ![png](/assets/img/2024-06-18-lifesat-linear-regressor/Life-Satisfaction_31_0.png)
 
 
+
+<details markdown="1">
+
+<summary><i>Hidden code</i></summary>
 
 
 ```python
@@ -768,6 +807,7 @@ axes[1].set_title("Linear model with train and test dataset")
 plt.show()
 ```
 
+</details>
 
 
 ![png](/assets/img/2024-06-18-lifesat-linear-regressor/Life-Satisfaction_32_0.png)

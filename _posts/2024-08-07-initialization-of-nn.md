@@ -23,6 +23,11 @@ rest of the layers of the neural network.
 2) The variance of the gradient distribution should be equal across layers. Hence, all weight on all layer would be capable of being updated.
 
 
+<details markdown="1">
+
+<summary><i>Hidden code</i></summary>
+
+
 ```python
 import os
 import json
@@ -48,12 +53,6 @@ import torch.optim as optim
 
 
 ```python
-# Path to the folder where the datasets are/should be downloaded (e.g. MNIST)
-DATASET_PATH = "../data"
-# Path to the folder where the pretrained models are saved
-CHECKPOINT_PATH = "../saved_models/tutorial4"
-
-
 # Function for setting the seed
 def set_seed(seed):
     np.random.seed(seed)
@@ -79,10 +78,17 @@ print("Using device", device)
     Using device cuda:0
 
 
+</details>
+
+
+
 
 ```python
 from torchvision.datasets import FashionMNIST
 from torchvision import transforms
+
+# Path to the folder where the datasets are/should be downloaded (e.g. MNIST)
+DATASET_PATH = "../data"
 
 # Transformations applied on each image => first make them a tensor, then normalize them with mean 0 and std 1
 transform = transforms.Compose(
@@ -203,6 +209,11 @@ model
 
 
 
+<details markdown="1">
+
+<summary><i>Hidden code</i></summary>
+
+
 ```python
 ##############################################################
 
@@ -317,6 +328,9 @@ def visualize_activations(model, color="C0", print_variance=False):
         for key in sorted(activations.keys()):
             print(f"{key} - Variance: {np.var(activations[key])}")
 ```
+
+</details>
+
 
 ## Constant initialization
 
@@ -750,4 +764,3 @@ visualize_activations(model, print_variance=True)
     Layer 4 - Variance: 0.2972699701786041
     Layer 6 - Variance: 0.24673429131507874
     Layer 8 - Variance: 0.2928749620914459
-
