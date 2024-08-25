@@ -59,7 +59,6 @@ def set_seed(seed):
         torch.cuda.manual_seed(seed)
         torch.cuda.manual_seed_all(seed)
 
-
 set_seed(42)
 
 # Ensure that all operations are deterministic on GPU (if used) for reproducibility
