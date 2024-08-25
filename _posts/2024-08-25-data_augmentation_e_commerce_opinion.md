@@ -1,13 +1,19 @@
 ---
-title: Women e-commerce reviews, data agumentation using Text-to-Text transformer
+title: Text generation using t5-small transformer
 author: wilberquito
 date: 2024-08-25 15:21:00 +0800
-categories: [Programming, C++]
-tags: [xeus cling, jupyter notebook, C++]
-pin: false
+categories: [Machine learning, NLP]
+tags: [t5-small, transformer, data agumentation, feature engineering, binning, hugging face]
+pin: true
 math: true
 mermaid: true
+image:
+    path: assets/img/2024-08-25-data_augmentation_e_commerce_opinion/t5-text-to-text-transformer.png
+    alt: Diagram of text-to-text framework
 ---
+
+> *Check out the original notebook [here](https://github.com/wilberquito/women-e-commerce-opinion/blob/main/data_augmentation_e_commerce_opinion.ipynb){:target="_blank"}.*
+{: .prompt-info }
 
 The goal of this blog is to demonstrate how data augmentation can enhance the
 development of a model pipeline capable of predicting the sentiment behind
@@ -214,6 +220,7 @@ reviews_df.info()
     memory usage: 1.8+ MB
 ```
 
+### Binning rating
 
 
 ```python
@@ -238,8 +245,14 @@ plt.show()
 
 
 ![png](assets/img/2024-08-25-data_augmentation_e_commerce_opinion/data_augmentation_e_commerce_opinion_10_0.png)
+_Distribution of ratings_
 
 
+Creating a model that predicts ratings based on reviews is challenging with the
+previous distribution. To address this, rather than predicting a rating between
+1 and 5, let's simplify it by predicting a value between 1 and 3: where 1
+indicates the user is dissatisfied, 2 indicates satisfaction, and 3 indicates
+the user loves the product.
 
 
 ```python
@@ -287,11 +300,15 @@ plt.show()
 
 
 ![png](assets/img/2024-08-25-data_augmentation_e_commerce_opinion/data_augmentation_e_commerce_opinion_13_0.png)
+_Distribution of softed rating_
 
 
 
-### Removing not usuful data
+### Removing useless data
 
+It would be helpful to determine if any features in the dataset are relevant.
+We can do this by first examining the linear correlation between `soft rating`
+and the other features.
 
 ```python
 numeric_reviews_df = reviews_df.select_dtypes(include="number").drop(
@@ -309,9 +326,9 @@ numeric_reviews_df.corr()
 |soft rating|0.036042|0.941389|0.726893|-0.062530|1.000000|
 
 
-From this information it is pretty clear that `positive feedback count` bothers more than helps.
-And not only that but it is a feature that doesn't really talk about the user opinion but
-how other interpreted.
+From this information, it's evident that the `positive feedback count` is more
+of a hindrance than a help. Additionally, it doesn't directly reflect the
+user's opinion but rather how others have interpreted it.
 
 
 ```python
@@ -384,7 +401,9 @@ reviews_df['class name'].value_counts()
 |Chemises|1|
 
 
-I decide to drop the features above because they are not balanced at all and to make things simpler.
+The features `division name`, `department name`, and `class name` could be
+useful, but their distribution is highly skewed. To simplify the analysis, I've
+decided to take a different approach and drop them.
 
 
 ```python
@@ -398,7 +417,7 @@ reviews_df.head(3)
 |1|1080|34|NaN|Love this dress!  it's sooo pretty.  i happene...|5|1|3|
 |2|1077|60|Some major design flaws|I had such high hopes for this dress and reall...|3|0|1|
 
-
+### Binning age
 
 ```python
 spam = 10
@@ -485,7 +504,7 @@ reviews_df.isna().any()
 |generation|False|
 
 
-Aham, there are some missing values. Let's figure it out how many for each feature.
+There are some missing values! Let's figure it out how many for each feature.
 
 
 ```python
@@ -505,7 +524,7 @@ reviews_df.isna().sum()
 
 
 
-Well, what about the % of missing values to respect the hole dataset?
+Well, what about the $\%$ of missing values to respect the hole dataset?
 
 
 ```python
@@ -524,9 +543,10 @@ Well, what about the % of missing values to respect the hole dataset?
 |generation|0.000000|
 
 
-What it bothers me the most if the 16% of missing values for titles.
-But there is arround 3.6% of missing descriptions which are the big problems.
-Titles can be generated as resume from the description but not the other way arround.
+What concerns me the most is the $16\%$ of missing values for titles. However, the
+more significant issue is the approximately $3.6\%$ of missing descriptions.
+Titles can be generated as summaries of the descriptions, but not the other way
+around.
 
 
 ```python
@@ -542,10 +562,8 @@ reviews_df.head(3)
 |2|2|1077|60|Some major design flaws|I had such high hopes for this dress and reall...|3|0|1|3|
 
 
-
-The number of missing titles decreased but there
-are still many reviews without title review.
-
+After removing the samples without descriptions, the number of missing titles
+decreased, but there are still many reviews without a title.
 
 ```python
 (reviews_df.isna().sum() * 100) / reviews_df.shape[0]
@@ -577,7 +595,7 @@ reviews_df['title'].head(3)
 
 
 
-### Main features
+### Select features
 
 
 ```python
@@ -619,7 +637,20 @@ reviews_df.dtypes
 |generation|category|
 
 
-## Fine-tunning text-to-text
+## Fine-tuning t5-small transformer
+
+T5 is a text-to-text transform framework capable to do machine translation,
+document summarization, question answering, and classification tasks (e.g.,
+sentiment analysis). If you want to know more about this framework consult it
+here as [A Shared Text-To-Text
+Framework](https://research.google/blog/exploring-transfer-learning-with-t5-the-text-to-text-transfer-transformer/).
+
+
+In this case we will fine-tune the transformer in order to provide
+good summarizations.
+
+### Generating datasets
+
 
 <details markdown="1">
 <summary><i>Hidden code</i></summary>
@@ -650,60 +681,6 @@ def generate_datasets(reviews, test_size=0.2, stratify='soft rating'):
 
     return train_datasets, infer_dataset
 ```
-
-</details>
-
-
-```python
-train_datasets, infer_dataset = generate_datasets(reviews_df)
-train_datasets, infer_dataset
-```
-
-
-
-```txt
-    (DatasetDict({
-         train: Dataset({
-             features: ['clothing id', 'title', 'review text', 'soft rating', 'recommended ind', 'generation', '__index_level_0__'],
-             num_rows: 15740
-         })
-         test: Dataset({
-             features: ['clothing id', 'title', 'review text', 'soft rating', 'recommended ind', 'generation', '__index_level_0__'],
-             num_rows: 3935
-         })
-     }),
-     Dataset({
-         features: ['clothing id', 'title', 'review text', 'soft rating', 'recommended ind', 'generation', '__index_level_0__'],
-         num_rows: 2966
-     }))
-```
-
-
-
-T5 is a Text-To-Text transform framework
-including machine translation, document summarization, question answering, and classification tasks (e.g., sentiment analysis). If you
-want to know more about this framework consult it here as [A Shared Text-To-Text Framework](https://research.google/blog/exploring-transfer-learning-with-t5-the-text-to-text-transfer-transformer/).
-
-
-In this case we will fine-tune the transformer in order to provide
-good summarizations.
-
-
-```python
-checkpoint = "google-t5/t5-small"
-tokenizer = AutoTokenizer.from_pretrained(checkpoint)
-```
-
-
-```txt
-    tokenizer_config.json:   0%|          | 0.00/2.32k [00:00<?, ?B/s]
-    spiece.model:   0%|          | 0.00/792k [00:00<?, ?B/s]
-    tokenizer.json:   0%|          | 0.00/1.39M [00:00<?, ?B/s]
-```
-
-
-<details markdown="1">
-<summary><i>Hidden code</i></summary>
 
 
 ```python
@@ -750,6 +727,47 @@ def compute_metrics(eval_pred):
 
 
 ```python
+train_datasets, infer_dataset = generate_datasets(reviews_df)
+train_datasets, infer_dataset
+```
+
+
+```txt
+    (DatasetDict({
+         train: Dataset({
+             features: ['clothing id', 'title', 'review text', 'soft rating', 'recommended ind', 'generation', '__index_level_0__'],
+             num_rows: 15740
+         })
+         test: Dataset({
+             features: ['clothing id', 'title', 'review text', 'soft rating', 'recommended ind', 'generation', '__index_level_0__'],
+             num_rows: 3935
+         })
+     }),
+     Dataset({
+         features: ['clothing id', 'title', 'review text', 'soft rating', 'recommended ind', 'generation', '__index_level_0__'],
+         num_rows: 2966
+     }))
+```
+
+
+
+
+
+```python
+checkpoint = "google-t5/t5-small"
+tokenizer = AutoTokenizer.from_pretrained(checkpoint)
+```
+
+
+```txt
+    tokenizer_config.json:   0%|          | 0.00/2.32k [00:00<?, ?B/s]
+    spiece.model:   0%|          | 0.00/792k [00:00<?, ?B/s]
+    tokenizer.json:   0%|          | 0.00/1.39M [00:00<?, ?B/s]
+```
+
+
+
+```python
 batch_size = 256
 batched = True
 train_datasets = train_datasets.map(preprocess_function, batch_size=batch_size, batched=batched)
@@ -763,6 +781,7 @@ train_datasets = train_datasets.map(preprocess_function, batch_size=batch_size, 
 
 
 
+### Fine-tuning t5-small
 
 ```python
 model = AutoModelForSeq2SeqLM.from_pretrained(checkpoint)
@@ -913,12 +932,6 @@ model
 ```
 
 
-### Fine-tunning a t5-small text to text transformer
-
-Fine-tunning the text to text transformer in order to adapt it to the data examples that we have. This model is saved on huggingface to reuse latter.
-
-
-
 ```python
 torch.cuda.is_available()
 ```
@@ -976,9 +989,10 @@ trainer.train()
 ```
 
 
-## Data agumentation text-to-text transformer
+## Data agumentation using the t5-small fine-tuned
 
-In this section we will se how to re-use the fine tuned model in the previous section to generete summaries as titles given the descriptions of the dataset.
+In this section we will se how to re-use the fine tuned model in the previous
+section to generete summaries as titles given the descriptions of the dataset.
 
 
 ```python
@@ -1075,7 +1089,7 @@ for data in infer_dataset:
 
 
 
-## Publish dataset in Hugging face
+## Publish the agumented dataset in Hugging Face
 
 
 ```python
