@@ -121,8 +121,11 @@ some latin characters, i.e., words with accents and other latin codification to 
 main();
 ```
 
+```txt
     Hola company!
     Amb la teva col·laboració i força assolirem el cim!
+```
+
 
 
 ## Built in types
@@ -162,6 +165,7 @@ std::cout << fst_digit << std::endl;
 std::cout << lst_digit << std::endl;
 ```
 
+```txt
     Vowels...
     a
     u
@@ -169,6 +173,7 @@ std::cout << lst_digit << std::endl;
     Digits...
     1
     9
+```
 
 
 ### String type
@@ -199,8 +204,10 @@ cout << hola << endl;
 cout << holax2 << endl;
 ```
 
+```txt
     hola
     holahola
+```
 
 
 ## The typedef keyword
@@ -246,6 +253,7 @@ int main() {
 main();
 ```
 
+```txt
     monday
     tuesday
     wednesday
@@ -253,6 +261,8 @@ main();
     friday
     saturday
     sunday
+```
+
 
 
 ## Code examples
@@ -279,10 +289,12 @@ int main() {
 ```c++
 main();
 ```
-     2
-     2
 
+```txt
+     2
+     2
     4
+```
 
 
 Notice that we use the commands `cin` to read from the standard input (keyboard)
@@ -328,10 +340,12 @@ int main() {
 ```c++
 main();
 ```
+
+```txt
      4
      5
-
     9
+```
 
 
 ### Calculate $x^y$
@@ -368,10 +382,12 @@ int main() {
 ```c++
 main();
 ```
+
+```txt
      10
      3
-
     1000
+```
 
 
 ### Prime factors
@@ -419,16 +435,17 @@ int main() {
 ```c++
 main();
 ```
-     350
 
+```txt
+     350
     2 5 5 7
+```
 
 
 
 **QUESTION: This algorithm only yields prime factors (an not non-prime factors). Why?**
 
 <details markdown="1">
-
 <summary><i>Answer:</i></summary>
 
 

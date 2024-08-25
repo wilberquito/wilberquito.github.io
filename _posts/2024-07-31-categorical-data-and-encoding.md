@@ -60,7 +60,7 @@ onehot_encoding
 
 
 
-
+```txt
     array([[1., 0., 0., 0., 0., 0., 0., 0.],
            [0., 1., 0., 0., 0., 0., 0., 0.],
            [0., 0., 0., 0., 1., 0., 0., 0.],
@@ -69,19 +69,16 @@ onehot_encoding
            [0., 0., 0., 1., 0., 0., 0., 0.],
            [0., 0., 0., 0., 0., 0., 1., 0.],
            [0., 0., 0., 0., 0., 0., 0., 1.]])
-
-
+```
 
 
 ```python
 onehot_encoding.shape
 ```
 
-
-
-
+```txt
     (8, 8)
-
+```
 
 
 ### PyTorch OneHotEncoder
@@ -100,10 +97,9 @@ labels_blood_type.tolist()
 
 
 
-
+```txt
     [0, 1, 4, 5, 2, 3, 6, 7]
-
-
+```
 
 
 ```python
@@ -114,7 +110,9 @@ tensor
 
 
 
+```txt
     tensor([0, 1, 4, 5, 2, 3, 6, 7])
+```
 
 
 
@@ -126,7 +124,7 @@ onehot_encoding
 
 
 
-
+```txt
     tensor([[1, 0, 0, 0, 0, 0, 0, 0],
             [0, 1, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 1, 0, 0, 0],
@@ -135,6 +133,8 @@ onehot_encoding
             [0, 0, 0, 1, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 1, 0],
             [0, 0, 0, 0, 0, 0, 0, 1]])
+```
+
 
 
 
@@ -145,8 +145,10 @@ onehot_encoding.shape
 
 
 
-
+```txt
     torch.Size([8, 8])
+```
+
 
 
 
@@ -177,9 +179,9 @@ blood_type_categories["blood_type"].values.tolist()
 
 
 
-
+```txt
     ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']
-
+```
 
 
 
@@ -192,8 +194,9 @@ word2idx
 
 
 
-
+```txt
     {'A+': 0, 'A-': 1, 'B+': 2, 'B-': 3, 'AB+': 4, 'AB-': 5, 'O+': 6, 'O-': 7}
+```
 
 
 
@@ -205,10 +208,9 @@ vocab_size
 
 
 
-
+```txt
     8
-
-
+```
 
 
 ```python
@@ -217,11 +219,9 @@ embedding_dim
 ```
 
 
-
-
+```txt
     16
-
-
+```
 
 
 ```python
@@ -231,12 +231,9 @@ encoded_type_categories = [
 encoded_type_categories
 ```
 
-
-
-
+```txt
     [0, 1, 2, 3, 4, 5, 6, 7]
-
-
+```
 
 
 ```python
@@ -247,6 +244,7 @@ input_tensor
 
 
 
+```txt
     tensor([[0],
             [1],
             [2],
@@ -255,7 +253,7 @@ input_tensor
             [5],
             [6],
             [7]])
-
+```
 
 
 
@@ -274,8 +272,10 @@ print("Input shape:", input_tensor.shape)
 print("Output shape:", embed_vectors.shape)
 ```
 
+```txt
     Input shape: torch.Size([8, 1])
     Output shape: torch.Size([8, 1, 16])
+```
 
 
 
@@ -284,20 +284,16 @@ input_tensor[0, :]
 ```
 
 
-
-
+```txt
     tensor([0])
-
-
-
+```
 
 ```python
 embed_vectors[0, :, :]
 ```
 
-
-
-
+```txt
     tensor([[ 1.9269,  1.4873,  0.9007, -2.1055,  0.6784, -1.2345, -0.0431, -1.6047,
              -0.7521,  1.6487, -0.3925, -1.4036, -0.7279, -0.5594, -0.7688,  0.7624]],
            grad_fn=<SliceBackward0>)
+```

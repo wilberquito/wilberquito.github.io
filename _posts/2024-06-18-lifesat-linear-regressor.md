@@ -79,8 +79,10 @@ X.shape, y.shape
 
 
 
-
+```txt
     ((27, 1), (27, 1))
+```
+
 
 
 
@@ -228,7 +230,9 @@ t0, t1
 
 
 
+```txt
     (3.749, 6.778899694341222e-05)
+```
 
 
 
@@ -258,14 +262,13 @@ yhat[:5]
 ```
 
 
-
-
+```txt
     array([[5.542452  ],
            [5.59876401],
            [5.67318985],
            [5.77809374],
            [5.85098552]])
-
+```
 
 
 
@@ -277,12 +280,13 @@ yhat_m[:5]
 
 
 
+```txt
     array([[5.54250143],
            [5.59881344],
            [5.67323928],
            [5.77814317],
            [5.85103495]])
-
+```
 
 
 The values predicted by the model and the function `life_satisfaction`
@@ -301,13 +305,14 @@ err
 
 
 
+```txt
     4.942737690907909e-05
+```
 
 
 
 
 <details markdown="1">
-
 <summary><i>Hidden code</i></summary>
 
 ```python
@@ -331,7 +336,6 @@ plt.show()
 ![png](/assets/img/2024-06-18-lifesat-linear-regressor/Life-Satisfaction_21_0.png)
 
 
-
 As you probably noticed, this model is kinda useless. It is cool to explain maths but we make no prediction on unseen data. So lets simulate that we have two dataset, one for training the model and one for actual testing the model and lets see its performance.
 
 
@@ -344,12 +348,13 @@ X_train.shape, X_test.shape, y_train.shape, y_test.shape
 
 
 
-
+```txt
     ((21, 1), (6, 1), (21, 1), (6, 1))
+```
+
 
 
 <details markdown="1">
-
 <summary><i>Hidden code</i></summary>
 
 
@@ -375,7 +380,6 @@ plt.show()
 
 
 
-
 ```python
 model = LinearRegression()
 model.fit(X_train, y_train)
@@ -387,10 +391,9 @@ t0, t1
 ```
 
 
-
-
+```txt
     (3.533, 7.18650303768337e-05)
-
+```
 
 
 
@@ -419,14 +422,13 @@ yhat_train[:5]
 ```
 
 
-
-
+```txt
     array([[6.8281986 ],
            [6.92910967],
            [6.33488274],
            [7.42848276],
            [5.49369788]])
-
+```
 
 
 <details markdown="1">
@@ -466,19 +468,19 @@ yhat_test[:5]
 
 
 
+```txt
     array([[6.13533505],
            [6.52424572],
            [6.15921518],
            [7.19224761],
            [5.43399993]])
-
+```
 
 
 In the following figure we can appreciate the predicted values which are projected in the regression line vs the real values gave by the test dataset.
 
 
 <details markdown="1">
-
 <summary><i>Hidden code</i></summary>
 
 
@@ -514,7 +516,6 @@ plt.show()
 
 
 <details markdown="1">
-
 <summary><i>Hidden code</i></summary>
 
 

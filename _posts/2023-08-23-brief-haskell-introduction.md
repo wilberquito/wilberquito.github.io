@@ -51,7 +51,7 @@ install tools to work with different Haskell environments.
 If you are using Linux, running the next command will be enough to install
 interactively a Haskell compiler (ghc) and other tools.
 
-```bash
+```console
 $ curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 ```
 
@@ -62,14 +62,13 @@ $ curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 
 After the installation, from the terminal you can call the Haskell interpreter as follow:
 
-```bash
+```console
 $ ghci
-ghci>
 ```
 
 You can use `ghci` as a calculator,
 
-```
+```console
 ghci> 2 + 5
 7
 ```
@@ -86,11 +85,10 @@ and the Haskell interpreter.
 | `:+m`                        | Load multiple script modules.            |
 | `:cd`                        | Change the current interpreter directory.|
 
-Lets create a script module call `Main.hs` and define the funcion `main`. The
-script module is under the download directory `~/Downloads`{: .filepath} for
-example.
+Lets create a script module call `Main.hs` and define the funcion `main` under
+the directory `~/Downloads`{: .filepath}.
 
-```
+```hs
 main = do
   putStrLn "Hello Haskell!"
 ```
@@ -98,7 +96,7 @@ main = do
 
 To load the script module from any path we can do,
 
-```
+```console
 ghci> :cd ~/Downloads/
 ghci> :l Main.hs
 ghci> main
@@ -122,7 +120,7 @@ $$ a - f(a, b) * c $$
 
 In Haskell function application is denoted by space, i.e.
 
-```
+```console
 ghci> a = 1 ; b = 2 ; c = 3 ; f = (+)
 ghci> a - f a b * c
 -8
@@ -139,7 +137,7 @@ allowed. In Haskell as in math, if we define a function $$f$$ that takes as an
 argument $$x$$, every evaluation of the application $$f(x)$$ return the same
 $$y$$.
 
-```
+```console
 ghci> double x = x * 2
 ghci> f        = double
 ghci> f 2
@@ -151,7 +149,7 @@ ghci> 4
 In Haskell functions are considered first-class citizens, which means they can
 be passed as arguments
 
-```
+```console
 ghci> double x      = x * 2
 ghci> computeBy f a = f a
 ghci> computeBy double 3
@@ -160,7 +158,7 @@ ghci> 6
 
 , or being returned as values.
 
-```
+```console
 ghci> double x  = x * 2
 ghci> double'   = double
 ghci> double' 2
@@ -174,7 +172,7 @@ There are basically two types of reductions, applicative reduction and normal
 reduction. After we continue, lets define two simple functions in the Haskell
 interpreter and application using the previous functions;
 
-```
+```console
 ghci> add1    = x + 1
 ghci> square  = x^2
 ```
@@ -191,7 +189,7 @@ Now, suppose we want to evaluate this lambda expression $$ S \ (A \ 2)$$
 expression. In Haskell this expression could be written as;
 
 
-```
+```console
 ghci> square (add1 2)
 ghci> 9
 ```
@@ -234,7 +232,7 @@ aligns with this principle as it generates the infinity number through
 recursive processes. On the contrary, the latter function consistently
 evaluates to zero, irrespective of its input value.
 
-```
+```console
 ghci> inf       = 1 + inf
 ghci> zero x    = 0
 ghci> zero inf
@@ -273,7 +271,7 @@ unevaluated expression. To show how the sharing work, lets define a function
 `square` that has one argument called `x`, we can also say that the function
 `square` has bounded the name `x`.
 
-```
+```console
 ghci> square x = x * x
 ```
 
@@ -338,7 +336,7 @@ Moreover, the process of evaluating an infinite list inevitably demands an
 infinite duration. In the Haskell, generating an infinite
 list of numbers is remarkably simple:
 
-```
+```console
 ghci> numbers = [1..]
 ```
 
@@ -348,7 +346,7 @@ interpreter remains unaffected and doesn't stall. However, **when we request the
 presentation of the list, we effectively compel the evaluation of the
 expression**. Consequently, as anticipated, the process comes to a halt:
 
-```
+```console
 ghci> numbers
 [1, 2, 3, 4, 5, 6, ...]
 ```
@@ -361,7 +359,7 @@ phenomenon in a Haskell context.
 In this instance, when the infinite list of numbers is employed as the second
 argument of function `f`, the interpreter proceeds without any issue:
 
-```
+```console
 ghci> numbers = [1..]
 ghci> f a b = a
 ghci> f (2 + 2) numbers
@@ -373,7 +371,7 @@ infinite list is passed as the first argument to function `f`, the
 interpreter will halt. This is a consequence of the
 evaluation mechanism for infinite lists.
 
-```
+```console
 ghci> numbers = [1..]
 ghci> f a b = a
 ghci> f numbers (2 + 2)
@@ -390,7 +388,7 @@ better way to refer to variables in Haskell is "values" or "names".
 Hence, attempting to modify any value's state as demonstrated in the following
 script module will lead to an error involving multiple bindings.
 
-```
+```hs
 main = do
   let x = 1
       x = 2
@@ -398,7 +396,7 @@ main = do
 ```
 {: file="~/Downloads/DummyError.hs" }
 
-```
+```console
 ghci> :cd ~/Downloads/
 ghci> :l DummyError.hs
 [1 of 1] Compiling Main             ( DummyError.hs, interpreted )
@@ -442,7 +440,7 @@ Most of the times, Haskell by its own can infer the type of expressions, so we
 do not need to explicitly write out the types of our functions and expressions
 to get things done, e.g.
 
-```
+```console
 ghci> :t 'a'
 'a' :: Char
 ghci> :t True
@@ -466,7 +464,7 @@ Lets see for example, the equal operation and how multiple types define this
 operation. It make sense to compare String with String and Int with and Int,
 but no a String with an Int, right?
 
-```
+```console
 ghci> "hello" == "hello"
 True
 ghci> "Hello" == "hellO"
@@ -479,7 +477,7 @@ False
 
 But if you try to compare different types, Haskell compiler will blame you:
 
-```
+```console
 ghci> 1 == "one"
 
 <interactive>:5:1: error:
@@ -492,7 +490,7 @@ ghci> 1 == "one"
 Why is that?, well to reason about it, lets ask to Haskell compiler information
 about the `(==)` operator.
 
-```
+```console
 ghci> :i (==)
 type Eq :: * -> Constraint
 class Eq a where
@@ -518,7 +516,7 @@ future article.
 For now, it is enough if you know that these types are instances of `Eq`.
 And if you do not believe it, we can ask the compiler, e.g.
 
-```
+```console
 ghci> :i Int
 type Int :: *
 data Int = GHC.Types.I# GHC.Prim.Int#
