@@ -110,6 +110,7 @@ output ["wa=\(wa)\t nt=\(nt)\t sa=\(sa)\n",
         "q=\(q)\t nsw=\(nsw)\t v=\(v)\n",
          "t=", show(t),  "\n"];
 ```
+{: file="aust.mzn" }
 
 If we save the code above in a file call *aust.mzn* and we execute it, we may
 expect a result as the following:
