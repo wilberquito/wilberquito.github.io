@@ -2,7 +2,7 @@
 title: Why is initialization essential to deep networks?
 author: wilberquito
 date: 2024-08-07 15:33:00 +0800
-categories: [Machine Learning, Bases]
+categories: [Machine learning, Bases]
 tags: [xavier initialization, activation functions, vanishing gradient problem]
 pin: true
 math: true
