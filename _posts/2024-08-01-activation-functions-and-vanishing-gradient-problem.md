@@ -2,7 +2,7 @@
 title: Activation functions and the vanishing gradient problem
 author: wilberquito
 date: 2024-08-01 15:33:00 +0800
-categories: [Machine Learning, Bases]
+categories: [Machine learning, Bases]
 tags: [activation functions, vanishing gradient problem]
 pin: false
 math: true

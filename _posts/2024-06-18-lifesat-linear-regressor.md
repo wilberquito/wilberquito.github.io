@@ -2,7 +2,7 @@
 title: Modeling life satisfaction with a linear regressor
 author: wilberquito
 date: 2024-06-14 11:33:00 +0800
-categories: [Machine Learning, Regressor]
+categories: [Machine learning, Regressor]
 tags: [programming, linear modeling, math, statistics]
 pin: false
 math: true

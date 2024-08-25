@@ -2,7 +2,7 @@
 title: Closed form vs. iterative optimization
 author: wilberquito
 date: 2024-07-05 15:33:00 +0800
-categories: [Machine Learning, Bases]
+categories: [Machine learning, Bases]
 tags: [programming, math, regression, normal equation, GD]
 pin: true
 math: true
