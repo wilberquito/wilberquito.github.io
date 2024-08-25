@@ -39,199 +39,35 @@ lifesat = pd.read_csv(join(data_root, "lifesat", "lifesat.csv"))
 lifesat.sort_values(by="Life satisfaction", ascending=False)
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Country</th>
-      <th>GDP per capita (USD)</th>
-      <th>Life satisfaction</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>25</th>
-      <td>Denmark</td>
-      <td>55938.212809</td>
-      <td>7.6</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>Finland</td>
-      <td>47260.800458</td>
-      <td>7.6</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>Iceland</td>
-      <td>52279.728851</td>
-      <td>7.5</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>Netherlands</td>
-      <td>54209.563836</td>
-      <td>7.4</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>Canada</td>
-      <td>45856.625626</td>
-      <td>7.4</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>New Zealand</td>
-      <td>42404.393738</td>
-      <td>7.3</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>Sweden</td>
-      <td>50683.323510</td>
-      <td>7.3</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>Australia</td>
-      <td>48697.837028</td>
-      <td>7.3</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>Israel</td>
-      <td>38341.307570</td>
-      <td>7.2</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>Austria</td>
-      <td>51935.603862</td>
-      <td>7.1</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>Germany</td>
-      <td>50922.358023</td>
-      <td>7.0</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>United States</td>
-      <td>60235.728492</td>
-      <td>6.9</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>Belgium</td>
-      <td>48210.033111</td>
-      <td>6.9</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>United Kingdom</td>
-      <td>41627.129269</td>
-      <td>6.8</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>France</td>
-      <td>42025.617373</td>
-      <td>6.5</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>Spain</td>
-      <td>36215.447591</td>
-      <td>6.3</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>Poland</td>
-      <td>32238.157259</td>
-      <td>6.1</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>Italy</td>
-      <td>38992.148381</td>
-      <td>6.0</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>Lithuania</td>
-      <td>36732.034744</td>
-      <td>5.9</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>Slovenia</td>
-      <td>36547.738956</td>
-      <td>5.9</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Latvia</td>
-      <td>29932.493910</td>
-      <td>5.9</td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>Russia</td>
-      <td>26456.387938</td>
-      <td>5.8</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>Estonia</td>
-      <td>35638.421351</td>
-      <td>5.7</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Hungary</td>
-      <td>31007.768407</td>
-      <td>5.6</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Turkey</td>
-      <td>28384.987785</td>
-      <td>5.5</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Greece</td>
-      <td>27287.083401</td>
-      <td>5.4</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Portugal</td>
-      <td>32181.154537</td>
-      <td>5.4</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+| |Country|GDP per capita (USD)|Life satisfaction|
+|:----|:----|:----|:----|
+|25|Denmark|55938.212809|7.6|
+|17|Finland|47260.800458|7.6|
+|23|Iceland|52279.728851|7.5|
+|24|Netherlands|54209.563836|7.4|
+|16|Canada|45856.625626|7.4|
+|15|New Zealand|42404.393738|7.3|
+|20|Sweden|50683.323510|7.3|
+|19|Australia|48697.837028|7.3|
+|11|Israel|38341.307570|7.2|
+|22|Austria|51935.603862|7.1|
+|21|Germany|50922.358023|7.0|
+|26|United States|60235.728492|6.9|
+|18|Belgium|48210.033111|6.9|
+|13|United Kingdom|41627.129269|6.8|
+|14|France|42025.617373|6.5|
+|8|Spain|36215.447591|6.3|
+|6|Poland|32238.157259|6.1|
+|12|Italy|38992.148381|6.0|
+|10|Lithuania|36732.034744|5.9|
+|9|Slovenia|36547.738956|5.9|
+|3|Latvia|29932.493910|5.9|
+|0|Russia|26456.387938|5.8|
+|7|Estonia|35638.421351|5.7|
+|4|Hungary|31007.768407|5.6|
+|2|Turkey|28384.987785|5.5|
+|1|Greece|27287.083401|5.4|
+|5|Portugal|32181.154537|5.4|
 
 
 
@@ -253,76 +89,16 @@ X.shape, y.shape
 lifesat.describe()
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>GDP per capita (USD)</th>
-      <th>Life satisfaction</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>count</th>
-      <td>27.000000</td>
-      <td>27.000000</td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td>41564.521771</td>
-      <td>6.566667</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>9631.452319</td>
-      <td>0.765607</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>26456.387938</td>
-      <td>5.400000</td>
-    </tr>
-    <tr>
-      <th>25%</th>
-      <td>33938.289305</td>
-      <td>5.900000</td>
-    </tr>
-    <tr>
-      <th>50%</th>
-      <td>41627.129269</td>
-      <td>6.800000</td>
-    </tr>
-    <tr>
-      <th>75%</th>
-      <td>49690.580269</td>
-      <td>7.300000</td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td>60235.728492</td>
-      <td>7.600000</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+| |GDP per capita (USD)|Life satisfaction|
+|:----|:----|:----|
+|count|27.000000|27.000000|
+|mean|41564.521771|6.566667|
+|std|9631.452319|0.765607|
+|min|26456.387938|5.400000|
+|25%|33938.289305|5.900000|
+|50%|41627.129269|6.800000|
+|75%|49690.580269|7.300000|
+|max|60235.728492|7.600000|
 
 
 
@@ -422,46 +198,10 @@ corr = lifesat[["GDP per capita (USD)", "Life satisfaction"]].corr()
 corr
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>GDP per capita (USD)</th>
-      <th>Life satisfaction</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>GDP per capita (USD)</th>
-      <td>1.000000</td>
-      <td>0.852796</td>
-    </tr>
-    <tr>
-      <th>Life satisfaction</th>
-      <td>0.852796</td>
-      <td>1.000000</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+| |GDP per capita (USD)|Life satisfaction|
+|:----|:----|:----|
+|GDP per capita (USD)|1.000000|0.852796|
+|Life satisfaction|0.852796|1.000000|
 
 
 Modeling with a regressor means creating a line that minimizes the distance between the samples.

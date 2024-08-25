@@ -31,67 +31,16 @@ blood_type_categories = pd.DataFrame(
 blood_type_categories
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>blood_type</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>A+</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>A-</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>B+</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>B-</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>AB+</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>AB-</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>O+</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>O-</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+| |blood_type|
+|:----|:----|
+|0|A+|
+|1|A-|
+|2|B+|
+|3|B-|
+|4|AB+|
+|5|AB-|
+|6|O+|
+|7|O-|
 
 
 ## OneHot Encoding
@@ -217,73 +166,6 @@ The Embedding layer requires at least 2 arguments; `num_embeddings` and `embeddi
 
 - **num_embeddings**: it means the size of the diccionary. If you have a vocabulary of 100 words, then the size of the dict is 100.
 - **embedding_dim**: this is the size of the embedding resulting vector.
-
-
-```python
-blood_type_categories
-```
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>blood_type</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>A+</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>A-</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>B+</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>B-</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>AB+</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>AB-</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>O+</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>O-</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
 
 
 We want to encode the blood type, there are 8 different blood types. So, the number of embeddings must be 8. The dim of each embedded vector can varie but lets say we set it to 16.
