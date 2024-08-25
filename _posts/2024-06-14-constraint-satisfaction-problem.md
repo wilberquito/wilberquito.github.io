@@ -14,8 +14,6 @@ image:
 
 ## What is Constraint Satisfaction Problem?
 
-
-
 A Constraint Satisfaction Problem (CSP) consists of:
 
 - a set of variables $\mathcal{X} = \\{x_1,...,x_n\\}$,
@@ -90,8 +88,7 @@ easily express and solve discrete optimisation problems. As any other
 language it has its own syntax and concepts that we need to learn, e.g.,
 keywords, decition variable, constant, etc.
 
-```mzn
-% Colouring Australia using nc colours
+```text
 int: nc = 3;
 
 var 1..nc: wa;   var 1..nc: nt;  var 1..nc: sa;   var 1..nc: q;
@@ -117,8 +114,11 @@ output ["wa=\(wa)\t nt=\(nt)\t sa=\(sa)\n",
 If we save the code above in a file call *aust.mzn* and we execute it, we may
 expect a result as the following:
 
-```sh
+```console
 $ minizinc aust.mzn
+```
+
+```txt
 wa=3	 nt=2	 sa=1
 q=3	 nsw=2	 v=3
 t=1

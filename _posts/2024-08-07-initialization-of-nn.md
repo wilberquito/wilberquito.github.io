@@ -16,17 +16,15 @@ mermaid: true
 
 When initializing a neural network, there are a few properties we would like to have.
 
-1) The variance of the input should be propagated through the model to the last layer.
+- The variance of the input should be propagated through the model to the last layer.
 It means, the *std* for the output neurons should be similar to the
 rest of the layers of the neural network.
 
-2) The variance of the gradient distribution should be equal across layers. Hence, all weight on all layer would be capable of being updated.
+- The variance of the gradient distribution should be equal across layers. Hence, all weight on all layer would be capable of being updated.
 
 
 <details markdown="1">
-
 <summary><i>Hidden code</i></summary>
-
 
 ```python
 import os
@@ -61,7 +59,6 @@ def set_seed(seed):
         torch.cuda.manual_seed(seed)
         torch.cuda.manual_seed_all(seed)
 
-
 set_seed(42)
 
 # Ensure that all operations are deterministic on GPU (if used) for reproducibility
@@ -75,12 +72,12 @@ device = (
 print("Using device", device)
 ```
 
+```txt
     Using device cuda:0
+```
 
 
 </details>
-
-
 
 
 ```python
@@ -122,8 +119,10 @@ print("Mean", (train_dataset.data.float() / 255).mean().item())
 print("Std", (train_dataset.data.float() / 255).std().item())
 ```
 
+```txt
     Mean 0.28604060411453247
     Std 0.3530242443084717
+```
 
 
 
@@ -133,14 +132,17 @@ print(f"Mean: {imgs.mean().item():5.3f}")
 print(f"Std: {imgs.std().item():5.3f}")
 ```
 
+```txt
     Mean: 0.020
     Std: 1.011
+```
 
+<details markdown="1">
+<summary><i>Hidden code</i></summary>
 
 
 ```python
 class BaseNetwork(nn.Module):
-
     def __init__(
         self, act_fn, input_size=784, num_classes=10, hidden_sizes=[512, 256, 256, 128]
     ):
@@ -178,10 +180,17 @@ class BaseNetwork(nn.Module):
 class Identity(nn.Module):
     def forward(self, x):
         return x
-
-
-act_fn_by_name = {"tanh": nn.Tanh, "relu": nn.ReLU, "identity": Identity}
 ```
+
+```python
+act_fn_by_name = {
+  "tanh": nn.Tanh,
+  "relu": nn.ReLU,
+  "identity": Identity
+}
+```
+
+</details>
 
 
 ```python
@@ -191,7 +200,7 @@ model
 
 
 
-
+```txt
     BaseNetwork(
       (layers): ModuleList(
         (0): Linear(in_features=784, out_features=512, bias=True)
@@ -206,11 +215,11 @@ model
       )
     )
 
+```
 
 
 
 <details markdown="1">
-
 <summary><i>Hidden code</i></summary>
 
 
@@ -354,27 +363,23 @@ model.layers[0].weight[:4]
 
 
 
-
+```txt
     tensor([[0.0050, 0.0050, 0.0050,  ..., 0.0050, 0.0050, 0.0050],
             [0.0050, 0.0050, 0.0050,  ..., 0.0050, 0.0050, 0.0050],
             [0.0050, 0.0050, 0.0050,  ..., 0.0050, 0.0050, 0.0050],
             [0.0050, 0.0050, 0.0050,  ..., 0.0050, 0.0050, 0.0050]],
            device='cuda:0', grad_fn=<SliceBackward0>)
-
-
+```
 
 
 ```python
 model.layers[0].bias[:4]
 ```
 
-
-
-
+```txt
     tensor([0.0050, 0.0050, 0.0050, 0.0050], device='cuda:0',
            grad_fn=<SliceBackward0>)
-
-
+```
 
 
 ```python
@@ -397,12 +402,13 @@ visualize_gradients(model, print_variance=True)
 ![svg](assets/img/2024-08-07-initialization-of-nn/initialization-of-nn_17_0.svg)
 
 
-
+```txt
     layers.0.weight - Variance: 7.095252856568407e-20
     layers.2.weight - Variance: 2.7083389842945504e-35
     layers.4.weight - Variance: 1.2037062152420224e-35
     layers.6.weight - Variance: 0.0
     layers.8.weight - Variance: 0.16812226176261902
+```
 
 
 
@@ -416,11 +422,14 @@ visualize_activations(model, print_variance=True)
 
 
 
+```txt
     Layer 0 - Variance: 2.0582756996154785
     Layer 2 - Variance: 13.489119529724121
     Layer 4 - Variance: 22.100570678710938
     Layer 6 - Variance: 36.209571838378906
     Layer 8 - Variance: 14.831441879272461
+```
+
 
 
 The gradients of layers *[2, 4 and 6]* are basically the same. It seams that is zero but it is a value very close to it.
@@ -438,7 +447,6 @@ Constant initialization did not work, what if we randomly initialize the weights
 def gauss_init(model, std=0.01):
     for _, param in model.named_parameters():
         param.data.normal_(std)
-
 
 model = BaseNetwork(act_fn=Identity()).to(device)
 gauss_init(model)
@@ -466,11 +474,13 @@ visualize_gradients(model, print_variance=True)
 
 
 
+```txt
     layers.0.weight - Variance: 637654.875
     layers.2.weight - Variance: 1891422.875
     layers.4.weight - Variance: 4253399.5
     layers.6.weight - Variance: 8013594.0
     layers.8.weight - Variance: 265435744.0
+```
 
 
 
@@ -478,18 +488,16 @@ visualize_gradients(model, print_variance=True)
 visualize_activations(model, print_variance=True)
 ```
 
-
-
 ![svg](assets/img/2024-08-07-initialization-of-nn/initialization-of-nn_25_0.svg)
 
 
-
+```txt
     Layer 0 - Variance: 821.2817993164062
     Layer 2 - Variance: 445128.03125
     Layer 4 - Variance: 110167632.0
     Layer 6 - Variance: 33995933696.0
     Layer 8 - Variance: 2410235297792.0
-
+```
 
 There are two things here, the varience of the gradients in the first layers are smaller than the gradients in the last layers and the variance of the activations tends to increase and explote by layers pass.
 
@@ -499,9 +507,9 @@ We need to sample the weights from a distribution, but we are not sure which one
 We will try to find an optimal initialization from the activation distribution perspective.
 The are two requirements:
 
-1) The *mean* of every activation should be zero (**not all activation functions generate a mean of zero, e.g., ReLU!!**)
+- The *mean* of every activation should be zero (**not all activation functions generate a mean of zero, e.g., ReLU!!**)
 
-2) The variance of the activations should stay the same across every layer
+- The variance of the activations should stay the same across every layer
 
 Lets say that we want to design an initialization for the following layer $l$:
 
@@ -597,7 +605,6 @@ def equal_var_init(model):
         else:
             param.data.normal_(std=1 / np.sqrt(param.shape[0]))
 
-
 model = BaseNetwork(act_fn=act_fn_by_name["tanh"]()).to(device)
 equal_var_init(model)
 ```
@@ -622,14 +629,13 @@ visualize_activations(model, print_variance=True)
 
 ![svg](assets/img/2024-08-07-initialization-of-nn/initialization-of-nn_38_0.svg)
 
-
-
+```txt
     Layer 0 - Variance: 1.6039454936981201
     Layer 2 - Variance: 0.9554153680801392
     Layer 4 - Variance: 0.38129329681396484
     Layer 6 - Variance: 0.4804670810699463
     Layer 8 - Variance: 3.7180206775665283
-
+```
 
 If we do the same compute but instead of focusing on the variance of the activation functions we would like to stabilize the gradients, starting from $\triangle x = W \triangle y$ we would
 conclude that layers should be initialized with a standard deviation equal to:
@@ -647,7 +653,6 @@ def equal_var_grad(model):
         else:
             param.data.normal_(std=1 / np.sqrt(param.shape[1]))
 
-
 model = BaseNetwork(act_fn=act_fn_by_name["tanh"]()).to(device)
 equal_var_grad(model)
 ```
@@ -657,11 +662,7 @@ equal_var_grad(model)
 visualize_weight_distribution(model)
 ```
 
-
-
 ![svg](assets/img/2024-08-07-initialization-of-nn/initialization-of-nn_41_0.svg)
-
-
 
 
 ```python
@@ -673,12 +674,14 @@ visualize_gradients(model, print_variance=True)
 ![svg](assets/img/2024-08-07-initialization-of-nn/initialization-of-nn_42_0.svg)
 
 
-
+```txt
     layers.0.weight - Variance: 8.416534001298714e-06
     layers.2.weight - Variance: 1.4514725080516655e-05
     layers.4.weight - Variance: 1.3293202755448874e-05
     layers.6.weight - Variance: 2.5526887839077972e-05
     layers.8.weight - Variance: 0.00030599694582633674
+```
+
 
 
 Xavier initialization focuses on the **harmonic mean of the variances**.
@@ -714,7 +717,6 @@ def xavier_normal(model):
         else:
             param.data.normal_(std=np.sqrt(2 / (param.shape[0] + param.shape[1])))
 
-
 model = BaseNetwork(act_fn=act_fn_by_name["tanh"]()).to(device)
 xavier_normal(model)
 ```
@@ -740,13 +742,13 @@ visualize_gradients(model, print_variance=True)
 ![svg](assets/img/2024-08-07-initialization-of-nn/initialization-of-nn_47_0.svg)
 
 
-
+```txt
     layers.0.weight - Variance: 2.057873825833667e-05
     layers.2.weight - Variance: 3.505633503664285e-05
     layers.4.weight - Variance: 4.9378442781744525e-05
     layers.6.weight - Variance: 7.525320688728243e-05
     layers.8.weight - Variance: 0.0006904705078341067
-
+```
 
 
 ```python
@@ -758,9 +760,10 @@ visualize_activations(model, print_variance=True)
 ![svg](assets/img/2024-08-07-initialization-of-nn/initialization-of-nn_48_0.svg)
 
 
-
+```txt
     Layer 0 - Variance: 1.2162493467330933
     Layer 2 - Variance: 0.5854033827781677
     Layer 4 - Variance: 0.2972699701786041
     Layer 6 - Variance: 0.24673429131507874
     Layer 8 - Variance: 0.2928749620914459
+```

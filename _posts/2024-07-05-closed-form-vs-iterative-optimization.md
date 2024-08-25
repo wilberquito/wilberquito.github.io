@@ -181,13 +181,10 @@ theta_bias = np.linalg.inv(X_b.T @ X_b) @ X_b.T @ y
 theta_bias
 ```
 
-
-
-
+```txt
     array([[4.21509616],
            [2.77011339]])
-
-
+```
 
 
 ```python
@@ -247,13 +244,10 @@ for epoch in range(n_epochs):
 theta_bias
 ```
 
-
-
-
+```txt
     array([[4.15809376],
            [2.8204434 ]])
-
-
+```
 
 
 ```python

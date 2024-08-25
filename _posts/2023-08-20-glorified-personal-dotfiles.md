@@ -39,7 +39,7 @@ programs. For the majority of installations, I rely on
 instances where a program might not be present in the package registry of this
 package manager, or you might prefer to acquire it from GitHub or using an
 alternative package manager. To accommodate these situations, I execute the
-installation of each program using individual shell or bash scripts. It's up to
+installation of each program using individual shell or console scripts. It's up to
 you to determine the installation method for each program. The installation
 script for each program is stored within the `install/`{: .filepath} directory.
 
@@ -61,7 +61,7 @@ Once you've crafted all the scripts for program installations, navigate to the
 `script/`{: .filepath} directory and execute the following command as a sudo
 user:
 
-```bash
+```console
 $ sudo ./install
 ```
 
@@ -110,7 +110,7 @@ Once you have included all the necessary configuration files and directories,
 proceed to the `script/`{: .filepath} directory and initiate the subsequent
 command:
 
-```bash
+```console
 $ ./symlink
 ```
 
@@ -133,8 +133,7 @@ These post-installation tasks can be managed by modifying the
 proceed to the `script/`{: .filepath} directory and execute the following
 command (you might need to elevate to superuser privileges):
 
-```bash
-# sudo ./bootstrap
+```console
 $ ./bootstrap
 ```
 

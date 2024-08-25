@@ -90,6 +90,8 @@ print("Using device", device)
 
 ## Activation functions definition
 
+<details markdown="1">
+<summary><i>Hidden code</i></summary>
 
 ```python
 class ActivationFunction(nn.Module):
@@ -133,6 +135,8 @@ class Swish(ActivationFunction):
     def forward(self, x):
         return x * torch.sigmoid(x)
 ```
+
+</details>
 
 
 ```python
@@ -206,10 +210,11 @@ plt.show()
 
 ## Analyzing the effect of activation functions
 
+<details markdown="1">
+<summary><i>Hidden code</i></summary>
 
 ```python
 class BaseNetwork(nn.Module):
-
     def __init__(
         self, act_fn, input_size=784, num_classes=10, hidden_sizes=[512, 256, 256, 128]
     ):
@@ -284,6 +289,8 @@ val_loader = data.DataLoader(val_set, batch_size=1024, shuffle=False, drop_last=
 test_loader = data.DataLoader(test_set, batch_size=1024, shuffle=False, drop_last=False)
 ```
 
+</details>
+
 
 ```python
 exmp_imgs = [train_set[i][0] for i in range(16)]
@@ -308,7 +315,6 @@ plt.close()
 
 
 <details markdown="1">
-
 <summary><i>Hidden code</i></summary>
 
 ```python
